@@ -1,9 +1,7 @@
 package bg.softuni.strengthstackshop.model.entity;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-
 import java.util.List;
 
 @Entity
