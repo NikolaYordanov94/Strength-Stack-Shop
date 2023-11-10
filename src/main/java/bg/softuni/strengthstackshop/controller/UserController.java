@@ -1,7 +1,13 @@
 package bg.softuni.strengthstackshop.controller;
 
+import bg.softuni.strengthstackshop.model.dto.user.UserRegisterBindingModel;
+import bg.softuni.strengthstackshop.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,10 +15,39 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/user")
 public class UserController {
 
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/register")
-    public ModelAndView register(){
+    public ModelAndView register(
+            @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel){
 
         return new ModelAndView("register");
+
+    }
+
+    @PostMapping("/register")
+    public ModelAndView register(
+            @ModelAttribute("userRegisterBindingModel") @Valid UserRegisterBindingModel userRegisterBindingModel,
+            BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("register");
+        }
+
+        boolean hasSuccessfulRegistration = userService.register(userRegisterBindingModel);
+
+        if(!hasSuccessfulRegistration){
+            ModelAndView modelAndView = new ModelAndView("register");
+            modelAndView.addObject("hasRegistrationError", true);
+            return modelAndView;
+        }
+
+        return new ModelAndView("redirect:/user/login");
+
     }
 
     @GetMapping("/login")
@@ -20,5 +55,7 @@ public class UserController {
 
         return new ModelAndView("login");
     }
+
+
 
 }
