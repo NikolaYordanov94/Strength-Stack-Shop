@@ -21,6 +21,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/login")
+    public ModelAndView login(){
+
+        return new ModelAndView("login");
+    }
+
     @GetMapping("/register")
     public ModelAndView register(
             @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel){
@@ -50,11 +56,6 @@ public class UserController {
 
     }
 
-    @GetMapping("/login")
-    public ModelAndView login(){
-
-        return new ModelAndView("login");
-    }
 
 
 

@@ -20,7 +20,7 @@ public class SecurityConfiguration {
         httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/user/login", "/user/register").permitAll()
+                        .requestMatchers("/", "/user/login", "/user/register", "/user/login-error").permitAll()
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin -> {
@@ -28,14 +28,14 @@ public class SecurityConfiguration {
                             .loginPage("/user/login")
                             .usernameParameter("username")
                             .passwordParameter("password")
-                            .defaultSuccessUrl("/")
+                            .defaultSuccessUrl("/home")
                             .failureForwardUrl("/user/login-error");
                 }
         ).logout(
                 logout -> {
                     logout
                             .logoutUrl("/user/logout")
-                            .logoutSuccessUrl("/")
+                            .logoutSuccessUrl("/user/login")
                             .invalidateHttpSession(true);
                 }
         );

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,24 +13,33 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-nav rounded " >
-        <a class="nav-link my-text-color active h5 " href="">Strength Stack Shop</a>
-        <a class="nav-link my-text-color active h5  " href="">Go to offers</a>
-        <a class="nav-link my-text-color active h5  " th:href="@{product/add}">Add product</a>
+        <a class="nav-link my-text-color active h5 " th:href="@{/}">Strength Stack Shop</a>
+        <a class="nav-link my-text-color active h5  " th:href="@{/}">Go to offers</a>
+        <a class="nav-link my-text-color active h5  " th:href="@{product-add}">Add product</a>
         <a class="nav-link my-text-color active h5  " href="">Admin panel</a>
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
                 <li class="nav-item col-md-4">
-                    <a class="nav-link active h5 my-text-color" th:href="@{user/login}">Login</a>
+                    <a class="nav-link active h5 my-text-color"
+                       sec:authorize="!isAuthenticated()" th:href="@{user/login}">Login</a>
                 </li>
 
                 <li class="nav-item col-md-4">
-                    <a class="nav-link my-text-color active h5 " th:href="@{user/register}">Register</a>
+                    <a class="nav-link my-text-color active h5 "
+                       sec:authorize="!isAuthenticated()" th:href="@{user/register}">Register</a>
                 </li>
 
-                    <a class="nav-link h5 my-text-color">Welcome, {username}</a>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link my-text-color active h5 " href="/">Logout</a>
+                    <a class="nav-link h5 my-text-color" sec:authorize="isAuthenticated()">Welcome,
+                        <th:block sec:authentication="name"></th:block>
+                    </a>
+
+                <li class="nav-item col-md-4" sec:authorize="isAuthenticated()">
+                    <form th:method="POST"
+                          th:action="@{/user/logout}">
+
+                        <input type="submit" class="nav-link my-text-color active h5 logout-btn" value="Logout" />
+                    </form>
                 </li>
             </ul>
         </div>

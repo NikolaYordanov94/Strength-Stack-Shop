@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet');
+
 .w-15 {
     width: 15%;
 }
@@ -17,6 +20,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     margin-bottom: 5rem;
+    font-family: 'Montserrat', sans-serif;
 }
 
 textarea {
@@ -75,4 +79,9 @@ footer {
 
 .badge-secondary{
     background-color: #720a75;
+}
+
+.logout-btn{
+    background-color: #343a40;
+    border-color: #FFB74D;
 }
