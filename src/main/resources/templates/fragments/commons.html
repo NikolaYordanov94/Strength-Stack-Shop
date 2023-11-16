@@ -15,7 +15,8 @@
     <nav class="navbar navbar-expand-lg bg-nav rounded " >
         <a class="nav-link my-text-color active h5 " th:href="@{/}">Strength Stack Shop</a>
         <a class="nav-link my-text-color active h5  " th:href="@{/}">Go to offers</a>
-        <a class="nav-link my-text-color active h5  " th:href="@{product-add}">Add product</a>
+        <a class="nav-link my-text-color active h5  "
+           sec:authorize="hasRole('ADMIN')" th:href="@{product-add}">Add product</a>
         <a class="nav-link my-text-color active h5  " href="">Admin panel</a>
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">

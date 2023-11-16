@@ -1,5 +1,6 @@
 package bg.softuni.strengthstackshop.config;
 
+import bg.softuni.strengthstackshop.model.enums.RoleName;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.impl.StrengthStackShopUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -21,6 +22,7 @@ public class SecurityConfiguration {
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/user/login", "/user/register", "/user/login-error").permitAll()
+                        .requestMatchers("/product-add").hasRole(RoleName.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin -> {

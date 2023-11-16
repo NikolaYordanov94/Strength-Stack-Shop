@@ -2,6 +2,8 @@ package bg.softuni.strengthstackshop.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,8 +31,8 @@ public class User extends BaseEntity{
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-    @ManyToMany
-    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
