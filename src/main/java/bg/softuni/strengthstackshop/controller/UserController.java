@@ -8,11 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -21,13 +19,24 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
+    @GetMapping("user/login")
     public ModelAndView login(){
 
         return new ModelAndView("login");
     }
 
-    @GetMapping("/register")
+    @PostMapping("user/login-error")
+    public ModelAndView onFailure(
+            @ModelAttribute("username") String username) {
+        ModelAndView modelAndView = new ModelAndView("login");
+
+        modelAndView.addObject("username", username);
+        modelAndView.addObject("bad_credentials", "true");
+
+        return modelAndView;
+    }
+
+    @GetMapping("user/register")
     public ModelAndView register(
             @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel){
 
@@ -35,7 +44,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/register")
+    @PostMapping("user/register")
     public ModelAndView register(
             @ModelAttribute("userRegisterBindingModel") @Valid UserRegisterBindingModel userRegisterBindingModel,
             BindingResult bindingResult){
@@ -55,8 +64,6 @@ public class UserController {
         return new ModelAndView("redirect:/user/login");
 
     }
-
-
 
 
 }
