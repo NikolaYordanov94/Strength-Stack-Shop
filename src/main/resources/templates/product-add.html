@@ -8,60 +8,86 @@
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add product</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
 
-    <form class="mx-auto w-25 bg-blur rounded" method="" action="">
+    <form class="mx-auto w-25 bg-blur rounded"
+          th:method="POST"
+          th:action="@{/product-add}"
+          th:object="${productAddBindingModel}">
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="description" class="h4 mb-2">Description</label>
             </div>
-            <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"></textarea>
-            <small class="text-danger">Description error message</small>
+            <textarea type="text" class="form-control" id="description"
+                      th:field="*{description}"
+                      th:errorclass="bg-danger" placeholder="Description"></textarea>
+
+            <small th:if="${#fields.hasErrors('description')}" 
+                   th:errors="*{description}" class="text-danger">Description error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="brand" class="h4 mb-2">Brand</label>
             </div>
-            <textarea type="text" class="form-control" id="brand" name="brand" placeholder="Brand"></textarea>
-            <small class="text-danger">Brand error message</small>
+            <textarea type="text" class="form-control" id="brand"
+                      th:field="*{brand}"
+                      th:errorclass="bg-danger" placeholder="Brand"></textarea>
+
+            <small th:if="${#fields.hasErrors('brand')}"
+                   th:errors="*{brand}" class="text-danger">Brand error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="price" class="h4 mb-2">Price</label>
             </div>
-            <textarea type="text" class="form-control" id="price" name="price" placeholder="Price"></textarea>
-            <small class="text-danger">Price error message</small>
+            <textarea type="text" class="form-control" id="price"
+                      th:field="*{price}"
+                      th:errorclass="bg-danger" placeholder="Price"></textarea>
+
+            <small th:if="${#fields.hasErrors('price')}"
+                   th:errors="*{price}" class="text-danger">Price error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="pictureUrl" class="h4 mb-2">Picture</label>
             </div>
-            <textarea type="text" class="form-control" id="pictureUrl" name="pictureUrl" placeholder="Picture Url"></textarea>
-            <small class="text-danger">Picture error message</small>
+            <textarea type="text" class="form-control" id="pictureUrl"
+                      th:field="*{pictureUrl}"
+                      th:errorclass="bg-danger" placeholder="Picture Url"></textarea>
+
+            <small th:if="${#fields.hasErrors('pictureUrl')}"
+                   th:errors="*{pictureUrl}" class="text-danger">Picture error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="createdAt" class="h4 mb-2">Created At</label>
             </div>
-            <input type="date" class="form-control" id="createdAt" name="createdAt"/>
-            <small class="text-danger">Input Date error message</small>
+            <input type="date" class="form-control" id="createdAt"
+                   th:field="*{createdAt}"
+                   th:errorclass="bg-danger"/>
+
+            <small th:if="${#fields.hasErrors('createdAt')}"
+                   th:errors="*{createdAt}" class="text-danger">Input Date error message</small>
         </div>
 
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="category" class="h4 mb-2">Category</label>
             </div>
-            <select class="browser-default custom-select" id="category" name="category">
+            <select class="browser-default custom-select" id="category"
+                    th:field="*{category}"
+                    th:errorclass="bg-danger">
                 <option value="">Select category</option>
                 <option value="SUPPLEMENTS">Supplements</option>
                 <option value="CLOTHES">Clothes</option>
                 <option value="GEAR">Gear</option>
             </select>
 
-            <small class="text-danger">Language error message</small>
+            <small th:if="${#fields.hasErrors('category')}"
+                   th:errors="*{category}" class="text-danger">Language error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

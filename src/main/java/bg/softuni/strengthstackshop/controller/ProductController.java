@@ -21,19 +21,20 @@ public class ProductController {
 
     @GetMapping("/product-add")
     public ModelAndView addProduct(
-            @ModelAttribute("ProductAddBindingModel") ProductAddBindingModel productAddBindingModel){
+            @ModelAttribute("productAddBindingModel") ProductAddBindingModel productAddBindingModel){
 
         return new ModelAndView("product-add");
     }
 
     @PostMapping("/product-add")
     public ModelAndView addProduct(
-            @ModelAttribute("ProductAddBindingModel") @Valid ProductAddBindingModel productAddBindingModel,
+            @ModelAttribute("productAddBindingModel") @Valid ProductAddBindingModel productAddBindingModel,
             BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("product-add");
         }
+
 
         productService.add(productAddBindingModel);
 
