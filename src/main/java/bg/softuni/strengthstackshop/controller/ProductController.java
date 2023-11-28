@@ -41,4 +41,13 @@ public class ProductController {
         return new ModelAndView("redirect:/home");
     }
 
+    @GetMapping("/offers")
+    public ModelAndView allProducts(){
+        ModelAndView modelAndView = new ModelAndView("offers");
+
+        modelAndView.addObject("allOffers", productService.getAllProducts());
+
+        return modelAndView;
+    }
+
 }

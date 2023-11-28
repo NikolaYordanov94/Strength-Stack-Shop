@@ -1,10 +1,14 @@
 package bg.softuni.strengthstackshop.service.impl;
 
+import bg.softuni.strengthstackshop.model.dto.product.AllProductsListViewDTO;
 import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.service.ProductService;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -31,4 +35,23 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
 
     }
+
+    @Override
+    public List<AllProductsListViewDTO> getAllProducts() {
+        List<Product> allProducts = productRepository.findAll();
+        List<AllProductsListViewDTO> allProductsListViewDTOS = new ArrayList<>();
+
+        allProducts.forEach(product -> {
+            AllProductsListViewDTO productDTO = new AllProductsListViewDTO();
+            productDTO.setBrand(product.getBrand());
+            productDTO.setCategory(product.getCategory());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setPictureUrl(product.getPictureUrl());
+
+            allProductsListViewDTOS.add(productDTO);
+        });
+        return allProductsListViewDTOS;
+    }
+
 }

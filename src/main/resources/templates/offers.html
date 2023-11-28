@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+<main>
+
+    <div class="container bg-blur rounded mt-3 mb-4">
+        <h1>All offers</h1>
+        <div class="row">
+            <div th:each="offer : ${allOffers}" class="col-md-4">
+                <div class="card">
+                    <img th:src="${offer.getPictureUrl()}" class="card-img-top" alt="Product Picture">
+                    <div class="card-body">
+                        <h5 class="card-text my-text-color" th:text="${offer.getDescription()}">Product Description</h5>
+                        <p class="card-text my-text-color" th:text="${offer.getCategory()}">Product Category</p>
+                        <p class="card-title my-text-color" th:text="${offer.getBrand()}">Product Brand</p>
+                        <p class="card-text my-text-color" th:text="${offer.getPrice()}">Product Price</p>
+
+                        <button type="button" class="btn btn-primary btn-block">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

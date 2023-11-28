@@ -13,8 +13,9 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-nav rounded " >
-        <a class="nav-link my-text-color active h5 " th:href="@{/}">Strength Stack Shop</a>
-        <a class="nav-link my-text-color active h5  " th:href="@{/}">Go to offers</a>
+        <a class="nav-link my-text-color active h5 "
+           th:href="${#authorization.expression('isAuthenticated()')} ? '/home' : '/'">Strength Stack Shop</a>
+        <a class="nav-link my-text-color active h5  " th:href="@{/offers}">Go to offers</a>
         <a class="nav-link my-text-color active h5  "
            sec:authorize="hasRole('ADMIN')" th:href="@{product-add}">Add product</a>
         <a class="nav-link my-text-color active h5  " href="">Admin panel</a>
