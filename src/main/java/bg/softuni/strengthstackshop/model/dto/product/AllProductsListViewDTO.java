@@ -1,34 +1,20 @@
 package bg.softuni.strengthstackshop.model.dto.product;
 
+import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.enums.Category;
-import jakarta.validation.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
-public class ProductAddBindingModel {
-
-    @NotNull(message = "Price cannot be null")
-    @DecimalMin(value = "0.01", message = "The price must be higher or equal to 0.01")
+public class AllProductsListViewDTO {
     private BigDecimal price;
 
-    @Size(min = 10, max = 100, message = "The description length should be between 10 and 100 symbols")
     private String description;
 
-    @NotNull(message = "You must select a date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PastOrPresent(message = "The date could not be in the future")
-    private LocalDate createdAt;
-
-    @Size(min = 3, max = 30, message = "The brand length should be between 3 and 30 symbols")
     private String brand;
 
-    @NotBlank(message = "The picture url could not be empty")
     private String pictureUrl;
 
-    @NotNull(message = "You must select a category")
     private Category category;
+
 
     public BigDecimal getPrice() {
         return price;
@@ -44,14 +30,6 @@ public class ProductAddBindingModel {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getBrand() {
@@ -76,5 +54,14 @@ public class ProductAddBindingModel {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+    public void map(Product product) {
+        if (product != null) {
+            this.price = product.getPrice();
+            this.description = product.getDescription();
+            this.brand = product.getBrand();
+            this.pictureUrl = product.getPictureUrl();
+            this.category = product.getCategory();
+        }
     }
 }

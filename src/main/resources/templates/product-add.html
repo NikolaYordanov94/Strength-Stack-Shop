@@ -21,7 +21,7 @@
                       th:field="*{description}"
                       th:errorclass="bg-danger" placeholder="Description"></textarea>
 
-            <small th:if="${#fields.hasErrors('description')}" 
+            <small th:if="${#fields.hasErrors('description')}"
                    th:errors="*{description}" class="text-danger">Description error message</small>
         </div>
 
