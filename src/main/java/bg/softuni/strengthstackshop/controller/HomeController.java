@@ -19,4 +19,10 @@ public class HomeController {
         return new ModelAndView("home");
     }
 
+    @GetMapping("/contacts")
+    public ModelAndView aboutUs(){
+
+        return new ModelAndView("contacts");
+    }
+
 }
