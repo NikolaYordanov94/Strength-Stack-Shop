@@ -18,9 +18,9 @@
         <hr class="my-3 bg-white w-75"/>
 
         <h3>
-            <a class="text-primary" href="/">Login</a>
+            <a class="text-primary" sec:authorize="!isAuthenticated()" th:href="@{user/login}">Login</a>
             if you have an account or
-            <a class="text-primary" href="/">Register</a>
+            <a class="text-primary" sec:authorize="!isAuthenticated()" th:href="@{user/register}">Register</a>
             now and check our high quality products.
         </h3>
     </div>
