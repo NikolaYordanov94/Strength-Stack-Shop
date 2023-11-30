@@ -1,8 +1,10 @@
 package bg.softuni.strengthstackshop.controller;
 
 import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
+import bg.softuni.strengthstackshop.model.entity.Order;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.entity.User;
+import bg.softuni.strengthstackshop.service.OrderService;
 import bg.softuni.strengthstackshop.service.ProductService;
 import bg.softuni.strengthstackshop.service.UserService;
 import jakarta.validation.Valid;
@@ -21,10 +23,12 @@ public class ProductController {
 
     private final ProductService productService;
     private final UserService userService;
+    private final OrderService orderService;
 
-    public ProductController(ProductService productService, UserService userService) {
+    public ProductController(ProductService productService, UserService userService, OrderService orderService) {
         this.productService = productService;
         this.userService = userService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/product-add")
@@ -55,11 +59,11 @@ public class ProductController {
 
         User user = userService.findByUsername(principal.getName());
         Product product = productService.findById(productId);
+        Order activeOrder = orderService.findOrCreateActiveOrder(user);
 
+        activeOrder.getProducts().add(product);
 
-
-
-        return new ModelAndView();
+        return new ModelAndView("product-buy");
     }
 
     @GetMapping("/offers")

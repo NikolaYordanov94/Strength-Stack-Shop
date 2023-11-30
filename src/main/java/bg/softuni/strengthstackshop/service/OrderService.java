@@ -9,6 +9,6 @@ public interface OrderService {
 
     Order createNewOrder(User user);
 
-    Order deactivateCurrentActiveOrder(User user);
+    void deactivateCurrentActiveOrder(User user);
 
 }
