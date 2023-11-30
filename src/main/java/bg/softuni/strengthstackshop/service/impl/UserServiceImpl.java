@@ -4,6 +4,7 @@ import bg.softuni.strengthstackshop.model.dto.user.UserRegisterBindingModel;
 import bg.softuni.strengthstackshop.model.entity.User;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.UserService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,13 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return true;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+
     }
 }

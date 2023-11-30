@@ -11,4 +11,6 @@ public interface ProductService {
     void add(ProductAddBindingModel productAddBindingModel);
 
     List<AllProductsListViewDTO> getAllProducts();
+
+    Product findById(Long productId);
 }

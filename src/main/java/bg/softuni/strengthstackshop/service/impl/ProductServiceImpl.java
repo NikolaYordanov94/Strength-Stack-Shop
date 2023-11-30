@@ -5,6 +5,7 @@ import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.service.ProductService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -52,6 +53,13 @@ public class ProductServiceImpl implements ProductService {
             allProductsListViewDTOS.add(productDTO);
         });
         return allProductsListViewDTOS;
+    }
+
+    @Override
+    public Product findById(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + productId));
+
     }
 
 }

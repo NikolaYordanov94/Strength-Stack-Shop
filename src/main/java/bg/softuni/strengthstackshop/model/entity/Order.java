@@ -20,6 +20,9 @@ public class Order extends BaseEntity{
     @DecimalMin(value = "0.01")
     private BigDecimal totalPrice;
 
+    @Column(nullable = false)
+    private boolean isActive;
+
     @ManyToMany
     private List<Product> products;
 
@@ -59,5 +62,13 @@ public class Order extends BaseEntity{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
