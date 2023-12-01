@@ -11,14 +11,18 @@
         <div class="row">
             <div th:each="offer : ${allOffers}" class="col-md-4">
                 <div class="card">
-                    <img th:src="${offer.getPictureUrl()}" class="card-img-top" alt="Product Picture">
+                    <img th:src="${offer.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
                     <div class="card-body">
-                        <h5 class="card-text my-text-color" th:text="${offer.getDescription()}">Product Description</h5>
-                        <p class="card-text my-text-color" th:text="${offer.getCategory()}">Product Category</p>
-                        <p class="card-title my-text-color" th:text="${offer.getBrand()}">Product Brand</p>
-                        <p class="card-text my-text-color" th:text="${offer.getPrice()}">Product Price</p>
+                        <h5 class="card-text my-offers-text-color" th:text="${offer.getDescription()}">Product Description</h5>
+                        <p class="card-text my-offers-text-color" th:text="${offer.getCategory()}">Product Category</p>
+                        <p class="card-title my-offers-text-color" th:text="${offer.getBrand()}">Product Brand</p>
+                        <p class="card-text my-offers-text-color" th:text="${offer.getPrice()}">Product Price</p>
 
-                        <button type="button" class="btn btn-primary btn-block">Buy</button>
+                        <form th:action="@{/product-buy}" th:method="POST">
+                            <input type="hidden" name="productId" th:value="${offer.getId()}">
+                            <button type="submit" class="btn btn-primary btn-block">Buy</button>
+                        </form>
+
                     </div>
                 </div>
             </div>

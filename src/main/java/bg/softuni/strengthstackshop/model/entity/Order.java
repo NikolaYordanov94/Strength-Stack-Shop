@@ -1,11 +1,11 @@
 package bg.softuni.strengthstackshop.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.PastOrPresent;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,19 +17,19 @@ public class Order extends BaseEntity{
     private LocalDate orderDate;
 
     @Column(nullable = false)
-    @DecimalMin(value = "0.01")
     private BigDecimal totalPrice;
 
     @Column(nullable = false)
     private boolean isActive;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Product> products;
 
     @ManyToOne
     private User user;
 
     public Order() {
+        products = new ArrayList<>();
     }
 
     public LocalDate getOrderDate() {

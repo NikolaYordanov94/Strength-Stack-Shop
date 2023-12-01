@@ -6,9 +6,34 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
 
-    <!--    todo: to finish product buy template-->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div th:each="product : ${currentOrderProducts}" class="col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <img th:src="${product.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
+                        <p class="product-info" th:text="${product.getDescription()}"></p>
+                        <p class="product-info" th:text="${product.getBrand()}"></p>
+                        <p class="product-info" th:text="${product.getPrice()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <p>Product buy</p>
+        <!-- Order details -->
+        <div class="order-info">
+            <div class="row">
+                <div class="col-12">
+                    <p>Date of order:  <span th:text="${currentOrder.getOrderDate()}"></span></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p>Total price:  <span th:text="${currentOrder.getTotalPrice()}"></span> bgn</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 <footer th:replace="~{fragments/commons::footer}"></footer>

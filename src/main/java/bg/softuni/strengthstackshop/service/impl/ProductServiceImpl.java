@@ -44,6 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
         allProducts.forEach(product -> {
             AllProductsListViewDTO productDTO = new AllProductsListViewDTO();
+            productDTO.setId(product.getId());
             productDTO.setBrand(product.getBrand());
             productDTO.setCategory(product.getCategory());
             productDTO.setDescription(product.getDescription());

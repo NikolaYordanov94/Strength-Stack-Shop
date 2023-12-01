@@ -55,15 +55,20 @@ public class ProductController {
 
     @PostMapping("product-buy")
     public ModelAndView buyProduct(@RequestParam("productId") Long productId, Principal principal){
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView("product-buy");
 
         User user = userService.findByUsername(principal.getName());
         Product product = productService.findById(productId);
-        Order activeOrder = orderService.findOrCreateActiveOrder(user);
+        Order activeOrder = orderService.findOrCreateActiveOrder(user, product);
 
         activeOrder.getProducts().add(product);
+        activeOrder.setTotalPrice(activeOrder.getTotalPrice().add(product.getPrice()));
+        orderService.saveOrderProduct(activeOrder, product);
 
-        return new ModelAndView("product-buy");
+        modelAndView.addObject("currentOrderProducts", activeOrder.getProducts());
+        modelAndView.addObject("currentOrder", activeOrder);
+
+        return modelAndView;
     }
 
     @GetMapping("/offers")

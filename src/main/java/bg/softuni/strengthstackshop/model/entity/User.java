@@ -28,7 +28,7 @@ public class User extends BaseEntity{
     @Length(min = 10, max = 50)
     private String address;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Order> orders;
 
     @ManyToMany(fetch = FetchType.EAGER)

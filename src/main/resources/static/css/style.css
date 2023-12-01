@@ -85,3 +85,46 @@ footer {
     background-color: #343a40;
     border-color: #FFB74D;
 }
+
+.product-card {
+    background-color: #343a40; /* Light gray background */
+    border: 1px solid #ddd; /* Light border for the card */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 20px; /* Space between cards */
+    padding: 15px; /* Padding inside the card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #FFB74D;
+}
+
+.product-info {
+    color: #FFB74D; /* Darker text color for contrast */
+    margin-bottom: 10px; /* Space between text elements */
+}
+
+.order-info {
+    background-color: #343a40; /* Slightly darker background for order info */
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px; /* Space above the order info section */
+    color: #FFB74D;
+    text-align: center; /* Center text horizontally */
+    margin-bottom: 50px!important;
+}
+
+.card-img-custom {
+    width: 100%;        /* Makes the image fill the container */
+    height: 200px;      /* Fixed height */
+    object-fit: contain; /* Ensures the entire image fits within the area */
+    object-position: center; /* Centers the image within the element */
+}
+
+.product-info{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    text-align: center;      /* Center text alignment */
+}
+
+.my-offers-text-color{
+    color: #343a40;
+}
