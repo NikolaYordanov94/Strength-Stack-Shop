@@ -4,6 +4,8 @@ import bg.softuni.strengthstackshop.model.entity.Order;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.entity.User;
 
+import java.security.Principal;
+
 public interface OrderService {
 
     Order findOrCreateActiveOrder(User user, Product product);
@@ -14,4 +16,7 @@ public interface OrderService {
 
     void saveOrderProduct(Order order, Product product);
 
+    void removeProductFromOrder(Long productId, Principal principal);
+
+    Order findActiveOrder(Principal principal);
 }

@@ -5,10 +5,13 @@ import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.entity.User;
 import bg.softuni.strengthstackshop.repository.OrderRepository;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
+import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.OrderService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -17,10 +20,12 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -64,4 +69,34 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
         productRepository.save(product);
     }
+
+    @Override
+    public void removeProductFromOrder(Long productId, Principal principal) {
+
+        Order order = orderRepository.findByUserUsername(principal.getName())
+                .stream().filter(Order::isActive)
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("Active order not found for user: " + principal.getName()));
+
+         Product productToRemove = order.getProducts().stream()
+             .filter(product -> product.getId() == productId)
+             .findFirst()
+             .orElseThrow(() -> new RuntimeException("Product not found in active order"));
+
+         order.setTotalPrice(order.getTotalPrice().subtract(productToRemove.getPrice()));
+
+         order.getProducts().remove(productToRemove);
+         orderRepository.save(order);
+    }
+
+    @Override
+    public Order findActiveOrder(Principal principal) {
+        return orderRepository.findByUserUsername(principal.getName())
+                .stream().filter(Order::isActive)
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("Active order not found for user: " + principal.getName()));
+
+    }
+
+
 }
