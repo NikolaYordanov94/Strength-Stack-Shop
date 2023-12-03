@@ -16,7 +16,7 @@
                         <p class="product-info" th:text="${product.getBrand()}"></p>
                         <p class="product-info" th:text="${product.getPrice()}"></p>
 
-                        <form th:action="@{/removeProduct}" th:method="POST">
+                        <form th:action="@{/removeProduct}" th:method="POST" class="btn-remove-product">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
                             <input type="hidden" name="productId" th:value="${product.getId()}" />
                             <button type="submit" class="btn btn-danger">Remove product</button>
@@ -38,6 +38,11 @@
                     <p>Total price:  <span th:text="${currentOrder.getTotalPrice()}"></span> bgn</p>
                 </div>
             </div>
+            <form th:action="@{/finishOrder}" th:method="POST">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                <input type="hidden" name="orderId" th:value="${currentOrder.getId()}" />
+                <button type="submit" class="btn btn-success">Finish Order</button>
+            </form>
         </div>
     </div>
 

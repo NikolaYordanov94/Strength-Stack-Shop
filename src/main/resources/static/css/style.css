@@ -72,6 +72,9 @@ footer {
 
 .my-text-color{
     color: #FFB74D!important;
+    background-color: #343a40;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
 #big-div{
@@ -84,6 +87,7 @@ footer {
 .logout-btn{
     background-color: #343a40;
     border-color: #FFB74D;
+    border-radius: 5px;
 }
 
 .product-card {
@@ -127,4 +131,19 @@ footer {
 
 .my-offers-text-color{
     color: #343a40;
+}
+
+.btn-remove-product{
+    background-color: #343a40; /* Slightly darker background for order info */
+    margin-top: 10px; /* Space above the order info section */
+    color: #FFB74D;
+    text-align: center; /* Center text horizontally */
+}
+
+.my-cards-background{
+    background-color: #343a40;
+}
+
+.orders-history-text{
+    color: #FFB74D;
 }

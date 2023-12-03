@@ -6,8 +6,22 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
 
-    <div class="container bg-blur rounded mt-3 mb-4">
-        <h1>All orders</h1>
+    <div class="container mt-3 mb-4">
+        <h1>Orders history</h1>
+
+        <div class="row">
+            <div th:each="order : ${currentUserOrders}" class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body my-cards-background orders-history-text">
+                        <h5 class="card-title">Order Date: <span th:text="${order.getOrderDate()}"></span></h5>
+                        <p class="card-text">Total Price: <span th:text="${order.getTotalPrice()}"></span></p>
+                        <p class="card-text">Total Products: <span th:text="${order.getProducts().size()}"></span></p>
+
+                        <a href="#" class="btn btn-primary">View Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </main>

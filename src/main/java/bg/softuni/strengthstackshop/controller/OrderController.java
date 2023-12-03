@@ -1,9 +1,8 @@
 package bg.softuni.strengthstackshop.controller;
 
 import bg.softuni.strengthstackshop.model.entity.Order;
+import bg.softuni.strengthstackshop.model.entity.User;
 import bg.softuni.strengthstackshop.service.OrderService;
-import bg.softuni.strengthstackshop.service.ProductService;
-import bg.softuni.strengthstackshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,8 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService, UserService userService, ProductService productService) {
+
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
@@ -40,6 +40,17 @@ public class OrderController {
         modelAndView.addObject("currentOrder", activeOrder);
 
         modelAndView.setViewName("product-buy");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/finishOrder")
+    public ModelAndView finishCurrentActiveOrder(@RequestParam("orderId") Long orderId){
+        ModelAndView modelAndView = new ModelAndView();
+        Order currentOrder = orderService.findCurrentOrderById(orderId);
+
+        orderService.deactivateCurrentActiveOrder(currentOrder.getUser());
+        modelAndView.setViewName("redirect:/home");
 
         return modelAndView;
     }

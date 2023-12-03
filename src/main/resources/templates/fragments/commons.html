@@ -25,25 +25,28 @@
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
-                <li class="nav-item col-md-4">
-                    <a class="nav-link active h5 my-text-color"
+                <li class="nav-item col-md-4 my-text-color">
+                    <a class="nav-link active h5 "
                        sec:authorize="!isAuthenticated()" th:href="@{user/login}">Login</a>
                 </li>
 
-                <li class="nav-item col-md-4">
-                    <a class="nav-link my-text-color active h5 "
+                <li class="nav-item col-md-4 my-text-color">
+                    <a class="nav-link active h5 "
                        sec:authorize="!isAuthenticated()" th:href="@{user/register}">Register</a>
                 </li>
 
+                <li>
                     <a class="nav-link h5 my-text-color" sec:authorize="isAuthenticated()">Welcome,
-                        <th:block sec:authentication="name"></th:block>
-                    </a>
+                    <th:block sec:authentication="name"></th:block>
+                </a>
+                </li>
 
-                <li class="nav-item col-md-4" sec:authorize="isAuthenticated()">
+
+                <li class="nav-item col-md-4 my-text-color" sec:authorize="isAuthenticated()">
                     <form th:method="POST"
                           th:action="@{/user/logout}">
 
-                        <input type="submit" class="nav-link my-text-color active h5 logout-btn" value="Logout" />
+                        <input type="submit" class="nav-link active h5 logout-btn" value="Logout" />
                     </form>
                 </li>
             </ul>

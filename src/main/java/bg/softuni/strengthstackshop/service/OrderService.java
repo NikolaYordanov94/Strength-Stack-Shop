@@ -19,4 +19,8 @@ public interface OrderService {
     void removeProductFromOrder(Long productId, Principal principal);
 
     Order findActiveOrder(Principal principal);
+
+    User findCurrentUserByUsername(Principal principal);
+
+    Order findCurrentOrderById(Long orderId);
 }

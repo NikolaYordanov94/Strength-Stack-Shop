@@ -22,10 +22,10 @@ public class OrderServiceImpl implements OrderService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository, UserRepository userRepository1) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
-        this.userRepository = userRepository;
+        this.userRepository = userRepository1;
     }
 
 
@@ -96,6 +96,19 @@ public class OrderServiceImpl implements OrderService {
                 .findFirst()
                 .orElseThrow(() -> new EntityNotFoundException("Active order not found for user: " + principal.getName()));
 
+    }
+
+    @Override
+    public User findCurrentUserByUsername(Principal principal) {
+
+        return userRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User not found: " + principal.getName()));
+    }
+
+    @Override
+    public Order findCurrentOrderById(Long orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order not found with id: " + orderId));
     }
 
 
