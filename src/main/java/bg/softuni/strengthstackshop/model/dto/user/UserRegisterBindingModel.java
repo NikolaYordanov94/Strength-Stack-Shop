@@ -1,5 +1,8 @@
 package bg.softuni.strengthstackshop.model.dto.user;
 
+import bg.softuni.strengthstackshop.validation.email.UniqueEmail;
+import bg.softuni.strengthstackshop.validation.phoneNumber.UniquePhoneNumber;
+import bg.softuni.strengthstackshop.validation.username.UniqueUsername;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -8,13 +11,16 @@ import jakarta.validation.constraints.Size;
 public class UserRegisterBindingModel {
 
     @Size(min = 3, max = 30, message = "Username length must be between 3 and 30 characters")
+    @UniqueUsername
     private String username;
 
     @Email
     @NotBlank(message = "Email cannot be empty")
+    @UniqueEmail
     private String email;
 
     @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Invalid phone number")
+    @UniquePhoneNumber
     private String phoneNumber;
 
     @Size(min = 20, max = 100, message = "Address length must be between 20 and 100 characters")
