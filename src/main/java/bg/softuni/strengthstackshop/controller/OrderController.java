@@ -1,7 +1,6 @@
 package bg.softuni.strengthstackshop.controller;
 
 import bg.softuni.strengthstackshop.model.entity.Order;
-import bg.softuni.strengthstackshop.model.entity.User;
 import bg.softuni.strengthstackshop.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

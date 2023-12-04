@@ -1,18 +1,29 @@
 package bg.softuni.strengthstackshop.service.impl;
 
+import bg.softuni.strengthstackshop.model.dto.comment.CommentCreateBindingModel;
+import bg.softuni.strengthstackshop.model.entity.Comment;
 import bg.softuni.strengthstackshop.model.entity.Product;
+import bg.softuni.strengthstackshop.model.entity.User;
+import bg.softuni.strengthstackshop.repository.CommentRepository;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
+import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.CommentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
     private final ProductRepository productRepository;
+    private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
 
-    public CommentServiceImpl(ProductRepository productRepository) {
+    public CommentServiceImpl(ProductRepository productRepository, CommentRepository commentRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
+        this.commentRepository = commentRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -20,5 +31,23 @@ public class CommentServiceImpl implements CommentService {
 
         return productRepository.findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + productId));
+    }
+
+    @Override
+    public void createComment(CommentCreateBindingModel commentCreateBindingModel, String username, Long productId) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with username: " + username));
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + productId));
+
+        Comment comment = new Comment();
+
+        comment.setCommentDate(LocalDate.now());
+        comment.setDescription(commentCreateBindingModel.getDescription());
+        comment.setUser(user);
+        comment.setProduct(product);
+        commentRepository.save(comment);
+        productRepository.save(product);
     }
 }

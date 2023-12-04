@@ -47,7 +47,6 @@ public class ProductController {
             return new ModelAndView("product-add");
         }
 
-
         productService.add(productAddBindingModel);
 
         return new ModelAndView("redirect:/home");
