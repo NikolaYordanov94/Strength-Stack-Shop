@@ -2,8 +2,11 @@ package bg.softuni.strengthstackshop.service.impl;
 
 import bg.softuni.strengthstackshop.model.dto.user.UserRegisterBindingModel;
 import bg.softuni.strengthstackshop.model.entity.User;
+import bg.softuni.strengthstackshop.model.enums.RoleName;
+import bg.softuni.strengthstackshop.repository.RoleRepository;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,11 +16,15 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
+    private final RoleRepository roleRepository;
 
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -35,12 +42,10 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        User user = new User();
-        user.setUsername(userRegisterBindingModel.getUsername());
-        user.setEmail(userRegisterBindingModel.getEmail());
-        user.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
-        user.setAddress(userRegisterBindingModel.getAddress());
-        user.setPhoneNumber(userRegisterBindingModel.getPhoneNumber());
+        userRegisterBindingModel.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
+        User user = modelMapper.map(userRegisterBindingModel, User.class);
+        user.getRoles().add(roleRepository.findByRoleName(RoleName.USER));
+        userRepository.save(user);
 
         userRepository.save(user);
 

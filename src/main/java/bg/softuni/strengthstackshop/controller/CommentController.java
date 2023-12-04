@@ -46,10 +46,10 @@ public class CommentController {
         Product currentProduct = commentService.findProductById(productId);
         modelAndView.addObject("currentProduct", currentProduct);
 
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("product-details");
-            return modelAndView;
-        }
+//        if (bindingResult.hasErrors()) {
+//            modelAndView.setViewName("product-details");
+//            return modelAndView;
+//        }
 
          commentService.createComment(commentCreateBindingModel, principal.getName(), productId);
 
