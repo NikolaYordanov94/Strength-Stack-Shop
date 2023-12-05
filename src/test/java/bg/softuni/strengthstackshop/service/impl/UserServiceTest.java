@@ -118,14 +118,6 @@ public class UserServiceTest {
         assertTrue(exists);
     }
 
-//    @Test
-//    public void testRegisterWithNullInput() {
-//        // Arrange & Act
-//        boolean result = userService.register(null);
-//
-//        // Assert
-//        assertFalse(result);
-//    }
 
     @Test
     public void testRegisterWhenPasswordEncoderThrowsException() {
