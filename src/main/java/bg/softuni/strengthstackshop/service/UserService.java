@@ -15,4 +15,6 @@ public interface UserService {
 
     boolean existsByUsername(String username);
 
+    void saveUser(User user);
+
 }

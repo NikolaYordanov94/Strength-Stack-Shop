@@ -7,32 +7,29 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
 
-<!--    todo: add product details view, including the comments for each product-->
-
     <div class="row">
         <div class="col-md-6">
             <h1>Product details</h1>
             <p th:text="${currentProduct.getCreatedAt()}"></p>
-            <!-- Replace 'name' with your actual product name field -->
             <div th:each="comment : ${currentProduct.getComments()}">
-                <p th:text="${comment}"></p>
+                <p th:text="${comment.description}"></p>
             </div>
 
             <form id="commentForm" th:method="POST"
-                  th:action="@{/comment-create}">
+                  th:action="@{/comment-create}" th:object="${commentCreateBindingModel}">
                 <input type="hidden" name="productId" th:value="${currentProduct.getId()}">
                 <div class="form-group">
                     <h4>Leave a comment</h4>
                     <label for="message">Message</label>
-                    <textarea name="textContent"
+                    <textarea th:field="*{description}"
+                              th:errorclass="bg-danger"
                               id="message"
                               cols="30"
                               rows="5"
                               class="form-control"
                               style="background-color: white;"></textarea>
-                    <small id="messageError" class="invalid-feedback">
-                        Message should be at least 10 characters.
-                    </small>
+                    <small th:if="${#fields.hasErrors('description')}"
+                           th:errors="*{description}" class="text-danger">Description error message</small>
                 </div>
 
                 <div class="form-group">

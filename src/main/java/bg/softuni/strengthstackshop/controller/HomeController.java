@@ -38,6 +38,7 @@ public class HomeController {
         return modelAndView;
     }
 
+
     @GetMapping("/contacts")
     public ModelAndView aboutUs(){
 
