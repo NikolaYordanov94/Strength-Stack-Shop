@@ -6,10 +6,19 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
 
-<!--    todo: Finish admin panel page, to manage roles-->
-
     <div class="container bg-blur rounded mt-3 mb-4">
         <h1>Admin Panel</h1>
+
+        <div th:each="user : ${allUsers}">
+            <br>
+            <p th:text="${user.getUsername()}"></p>
+            <form th:action="@{/removeUser}" th:method="POST" class="btn-remove-product">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                <input type="hidden" name="userId" th:value="${user.getId()}" />
+                <button type="submit" class="btn btn-danger">Remove user</button>
+            </form>
+
+        </div>
 
     </div>
 </main>

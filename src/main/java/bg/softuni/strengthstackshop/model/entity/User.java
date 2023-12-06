@@ -28,13 +28,13 @@ public class User extends BaseEntity{
     @Length(min = 10, max = 50)
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     public User() {
