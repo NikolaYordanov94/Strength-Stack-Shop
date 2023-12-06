@@ -6,6 +6,7 @@ import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,23 +16,18 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ModelMapper modelMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
+        this.modelMapper = modelMapper;
     }
 
 
     @Override
     public void add(ProductAddBindingModel productAddBindingModel) {
 
-        Product product = new Product();
-
-        product.setDescription(productAddBindingModel.getDescription());
-        product.setBrand(productAddBindingModel.getBrand());
-        product.setPrice(productAddBindingModel.getPrice());
-        product.setPictureUrl(productAddBindingModel.getPictureUrl());
-        product.setCreatedAt(productAddBindingModel.getCreatedAt());
-        product.setCategory(productAddBindingModel.getCategory());
+        Product product = modelMapper.map(productAddBindingModel, Product.class);
 
         productRepository.save(product);
 
@@ -44,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
         allProducts.forEach(product -> {
             AllProductsListViewDTO productDTO = new AllProductsListViewDTO();
+
             productDTO.setId(product.getId());
             productDTO.setBrand(product.getBrand());
             productDTO.setCategory(product.getCategory());
