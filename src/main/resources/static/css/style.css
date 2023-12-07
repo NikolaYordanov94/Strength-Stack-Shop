@@ -151,3 +151,8 @@ footer {
 .btn-details-offer{
     margin-top: 10px;
 }
+
+.error-img-style {
+    object-fit: contain; /* Ensures the entire image fits within the area */
+    object-position: center; /* Centers the image within the element */
+}
