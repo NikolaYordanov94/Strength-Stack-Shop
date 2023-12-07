@@ -1,7 +1,9 @@
 package bg.softuni.strengthstackshop.controller;
 
+import bg.softuni.strengthstackshop.model.dto.order.OrderHomeViewDTO;
 import bg.softuni.strengthstackshop.model.entity.Order;
 import bg.softuni.strengthstackshop.repository.OrderRepository;
+import bg.softuni.strengthstackshop.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,11 +13,10 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+    private final OrderService orderService;
 
-    private final OrderRepository orderRepository;
-
-    public HomeController(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public HomeController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @GetMapping("/")
@@ -28,8 +29,8 @@ public class HomeController {
     public ModelAndView home(Principal principal){
         ModelAndView modelAndView = new ModelAndView();
 
-        List<Order> currentUserOrders = orderRepository
-                .findByUserUsername(principal.getName());
+        List<OrderHomeViewDTO> currentUserOrders = orderService
+                .findOrdersByUsername(principal.getName());
 
         modelAndView.setViewName("home");
         modelAndView.addObject("currentUserOrders", currentUserOrders);

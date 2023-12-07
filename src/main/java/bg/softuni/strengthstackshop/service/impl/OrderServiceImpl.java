@@ -1,5 +1,6 @@
 package bg.softuni.strengthstackshop.service.impl;
 
+import bg.softuni.strengthstackshop.model.dto.order.OrderHomeViewDTO;
 import bg.softuni.strengthstackshop.model.entity.Order;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.entity.User;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -109,6 +112,24 @@ public class OrderServiceImpl implements OrderService {
     public Order findCurrentOrderById(Long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order not found with id: " + orderId));
+    }
+
+    @Override
+    public List<OrderHomeViewDTO> findOrdersByUsername(String username) {
+
+        List<Order> orders = orderRepository.findByUserUsername(username);
+        List<OrderHomeViewDTO> orderHomeViewDTOList = new ArrayList<>();
+
+        orders.forEach(order -> {
+            OrderHomeViewDTO orderHomeViewDTO = new OrderHomeViewDTO();
+            orderHomeViewDTO.setOrderDate(order.getOrderDate());
+            orderHomeViewDTO.setTotalPrice(order.getTotalPrice());
+            orderHomeViewDTO.setProducts(order.getProducts());
+
+            orderHomeViewDTOList.add(orderHomeViewDTO);
+        });
+
+        return orderHomeViewDTOList;
     }
 
 
