@@ -8,6 +8,8 @@ import java.util.List;
 
 public class OrderHomeViewDTO {
 
+    private Long id;
+
     private LocalDate orderDate;
 
     private BigDecimal totalPrice;
@@ -36,5 +38,13 @@ public class OrderHomeViewDTO {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

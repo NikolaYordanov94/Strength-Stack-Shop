@@ -21,7 +21,7 @@ public class AdminController {
 
     @GetMapping("/adminPanel")
     public ModelAndView adminPanel(){
-        ModelAndView modelAndView = new ModelAndView("adminPanel");
+        ModelAndView modelAndView = new ModelAndView("admin-panel");
 
         List<UserAdminViewDTO> userAdminViewDTOS = adminService.getAllUsers();
         modelAndView.addObject("allUsers", userAdminViewDTOS);
@@ -35,7 +35,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         adminService.removeUserById(userId);
 
-        modelAndView.setViewName("redirect:/adminPanel");
+        modelAndView.setViewName("redirect:/admin-panel");
 
         return modelAndView;
 

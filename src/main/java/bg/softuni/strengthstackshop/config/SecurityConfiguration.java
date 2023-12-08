@@ -42,8 +42,6 @@ public class SecurityConfiguration {
                 }
         );
 
-        //todo: remember me!
-
         return httpSecurity.build();
     }
 

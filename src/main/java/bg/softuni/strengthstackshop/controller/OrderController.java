@@ -1,5 +1,6 @@
 package bg.softuni.strengthstackshop.controller;
 
+import bg.softuni.strengthstackshop.model.dto.order.OrderHomeViewDTO;
 import bg.softuni.strengthstackshop.model.entity.Order;
 import bg.softuni.strengthstackshop.service.OrderService;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,18 @@ public class OrderController {
         modelAndView.addObject("currentOrder", activeOrder);
 
         modelAndView.setViewName("product-buy");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/order-details")
+    public ModelAndView getOrderDetails(@RequestParam("orderId") Long orderId){
+        ModelAndView modelAndView = new ModelAndView();
+
+        OrderHomeViewDTO orderHomeViewDTO = orderService.findOrderById(orderId);
+
+        modelAndView.addObject("currentUserOrder", orderHomeViewDTO);
+        modelAndView.setViewName("order-details");
 
         return modelAndView;
     }

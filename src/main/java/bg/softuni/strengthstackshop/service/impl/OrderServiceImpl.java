@@ -132,5 +132,12 @@ public class OrderServiceImpl implements OrderService {
         return orderHomeViewDTOList;
     }
 
+    @Override
+    public OrderHomeViewDTO findOrderById(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order not found with id: " + orderId));
 
+        return modelMapper.map(order, OrderHomeViewDTO.class);
+
+    }
 }

@@ -27,4 +27,6 @@ public interface OrderService {
     Order findCurrentOrderById(Long orderId);
 
     List<OrderHomeViewDTO> findOrdersByUsername(String username);
+
+    OrderHomeViewDTO findOrderById(Long orderId);
 }

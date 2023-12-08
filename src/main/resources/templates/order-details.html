@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+<main>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div th:each="product : ${currentUserOrder.getProducts()}" class="col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <img th:src="${product.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
+                        <p class="product-info" th:text="${product.getDescription()}"></p>
+                        <p class="product-info" th:text="${product.getBrand()}"></p>
+                        <p class="product-info" th:text="${product.getPrice()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

@@ -17,7 +17,11 @@
                         <p class="card-text">Total Price: <span th:text="${order.getTotalPrice()}"></span></p>
                         <p class="card-text">Total Products: <span th:text="${order.getProducts().size()}"></span></p>
 
-                        <a href="#" class="btn btn-primary">View Order</a>
+                        <form th:action="@{/order-details}" th:method="GET">
+                            <input type="hidden" name="orderId" th:value="${order.getId()}" />
+                            <button type="submit" class="btn btn-primary">Order Details</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
