@@ -47,6 +47,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setDescription(commentCreateBindingModel.getDescription());
         comment.setUser(user);
         comment.setProduct(product);
+
         commentRepository.save(comment);
         productRepository.save(product);
     }

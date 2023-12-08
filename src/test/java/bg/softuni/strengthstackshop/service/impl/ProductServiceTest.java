@@ -2,7 +2,7 @@ package bg.softuni.strengthstackshop.service.impl;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import bg.softuni.strengthstackshop.model.dto.product.AllProductsListViewDTO;
+import bg.softuni.strengthstackshop.model.dto.product.ProductViewDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,7 +40,7 @@ public class ProductServiceTest {
         // Arrange
         when(productRepository.findAll()).thenReturn(Collections.singletonList(new Product()));
         // Act
-        List<AllProductsListViewDTO> products = productService.getAllProducts();
+        List<ProductViewDTO> products = productService.getAllProducts();
         // Assert
         assertFalse(products.isEmpty());
         verify(productRepository).findAll();

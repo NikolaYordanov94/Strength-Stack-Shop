@@ -1,6 +1,6 @@
 package bg.softuni.strengthstackshop.service.impl;
 
-import bg.softuni.strengthstackshop.model.dto.product.AllProductsListViewDTO;
+import bg.softuni.strengthstackshop.model.dto.product.ProductViewDTO;
 import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
@@ -34,19 +34,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<AllProductsListViewDTO> getAllProducts() {
+    public List<ProductViewDTO> getAllProducts() {
         List<Product> allProducts = productRepository.findAll();
-        List<AllProductsListViewDTO> allProductsListViewDTOS = new ArrayList<>();
+        List<ProductViewDTO> allProductsListViewDTOS = new ArrayList<>();
 
         allProducts.forEach(product -> {
-            AllProductsListViewDTO productDTO = new AllProductsListViewDTO();
-
-            productDTO.setId(product.getId());
-            productDTO.setBrand(product.getBrand());
-            productDTO.setCategory(product.getCategory());
-            productDTO.setDescription(product.getDescription());
-            productDTO.setPrice(product.getPrice());
-            productDTO.setPictureUrl(product.getPictureUrl());
+            ProductViewDTO productDTO = modelMapper.map(product, ProductViewDTO.class);
 
             allProductsListViewDTOS.add(productDTO);
         });

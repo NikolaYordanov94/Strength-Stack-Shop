@@ -4,7 +4,7 @@ import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.enums.Category;
 import java.math.BigDecimal;
 
-public class AllProductsListViewDTO {
+public class ProductViewDTO {
     private Long id;
 
     private BigDecimal price;

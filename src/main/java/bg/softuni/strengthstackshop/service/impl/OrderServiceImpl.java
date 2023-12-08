@@ -9,6 +9,7 @@ import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.OrderService;
 import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,11 +25,13 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository, UserRepository userRepository1) {
+    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository, UserRepository userRepository1, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository1;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -121,10 +124,7 @@ public class OrderServiceImpl implements OrderService {
         List<OrderHomeViewDTO> orderHomeViewDTOList = new ArrayList<>();
 
         orders.forEach(order -> {
-            OrderHomeViewDTO orderHomeViewDTO = new OrderHomeViewDTO();
-            orderHomeViewDTO.setOrderDate(order.getOrderDate());
-            orderHomeViewDTO.setTotalPrice(order.getTotalPrice());
-            orderHomeViewDTO.setProducts(order.getProducts());
+            OrderHomeViewDTO orderHomeViewDTO = modelMapper.map(order, OrderHomeViewDTO.class);
 
             orderHomeViewDTOList.add(orderHomeViewDTO);
         });

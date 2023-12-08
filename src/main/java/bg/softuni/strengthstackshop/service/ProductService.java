@@ -1,6 +1,6 @@
 package bg.softuni.strengthstackshop.service;
 
-import bg.softuni.strengthstackshop.model.dto.product.AllProductsListViewDTO;
+import bg.softuni.strengthstackshop.model.dto.product.ProductViewDTO;
 import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
 import bg.softuni.strengthstackshop.model.entity.Product;
 
@@ -10,7 +10,7 @@ public interface ProductService {
 
     void add(ProductAddBindingModel productAddBindingModel);
 
-    List<AllProductsListViewDTO> getAllProducts();
+    List<ProductViewDTO> getAllProducts();
 
     Product findById(Long productId);
 }

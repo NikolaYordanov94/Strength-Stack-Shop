@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService {
         userRegisterBindingModel.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
         User user = modelMapper.map(userRegisterBindingModel, User.class);
         user.getRoles().add(roleRepository.findByRoleName(RoleName.USER));
-        userRepository.save(user);
 
         userRepository.save(user);
 
