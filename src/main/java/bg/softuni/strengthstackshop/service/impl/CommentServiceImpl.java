@@ -12,6 +12,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -42,7 +45,6 @@ public class CommentServiceImpl implements CommentService {
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + productId));
 
         Comment comment = new Comment();
-
         comment.setCommentDate(LocalDate.now());
         comment.setDescription(commentCreateBindingModel.getDescription());
         comment.setUser(user);
@@ -50,5 +52,16 @@ public class CommentServiceImpl implements CommentService {
 
         commentRepository.save(comment);
         productRepository.save(product);
+    }
+
+    @Override
+    public void clearOldComments() {
+
+        List<Comment> oldComments = commentRepository.findAllByCommentDateBefore(LocalDateTime
+                .now().minusYears(5)).orElse(new ArrayList<>());
+
+        if (!oldComments.isEmpty()) {
+            commentRepository.deleteAll(oldComments);
+        }
     }
 }

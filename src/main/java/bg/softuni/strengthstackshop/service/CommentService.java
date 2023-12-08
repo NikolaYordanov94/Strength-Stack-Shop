@@ -9,4 +9,6 @@ public interface CommentService {
 
     void createComment(CommentCreateBindingModel commentCreateBindingModel, String username, Long productId);
 
+    void clearOldComments();
+
 }
