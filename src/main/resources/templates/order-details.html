@@ -14,7 +14,9 @@
                         <img th:src="${product.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
                         <p class="product-info" th:text="${product.getDescription()}"></p>
                         <p class="product-info" th:text="${product.getBrand()}"></p>
-                        <p class="product-info" th:text="${product.getPrice()}"></p>
+                        <p class="product-info">
+                            Price:&nbsp; <span th:text="${product.getPrice()}"></span>&nbsp;bgn
+                        </p>
                     </div>
                 </div>
             </div>

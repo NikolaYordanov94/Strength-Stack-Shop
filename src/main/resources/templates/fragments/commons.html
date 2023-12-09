@@ -13,8 +13,10 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-nav rounded " >
-        <a class="nav-link my-text-color active h5 "
-           th:href="${#authorization.expression('isAuthenticated()')} ? '/home' : '/'">Strength Stack Shop</a>
+        <a class="nav-link my-text-color active h5"
+           th:href="${#authorization.expression('isAuthenticated()')} ? '/home' : '/'">
+            <img th:src="@{/images/logo.jpg}" alt="Strength Stack Shop" class="logo-img-style">
+        </a>
         <a class="nav-link my-text-color active h5  "
            sec:authorize="isAuthenticated()" th:href="@{/offers}">Go to offers</a>
         <a class="nav-link my-text-color active h5  "
@@ -39,7 +41,7 @@
 
                 <input type="submit" class="nav-link active h5 logout-btn my-text-color" value="Logout" />
             </form>
-            
+
         </div>
     </nav>
 </header>

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-class CommentServiceImplTest {
+class CommentServiceTest {
 
     @Mock
     private ProductRepository productRepository;
