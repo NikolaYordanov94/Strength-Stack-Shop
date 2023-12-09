@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
 <body>
+<header th:replace="~{fragments/commons::nav}"></header>
+<main>
 
+    <div class="container bg-blur rounded mt-3 mb-4">
+        <h1>All offers</h1>
+        <!-- Buttons Row -->
+        <div class="row mb-3">
+            <!-- Supplements Button -->
+            <div class="col">
+                <form th:action="@{offers-supplements}" th:method="GET">
+                    <button type="submit" class="btn btn-primary equal-width-btn">Supplements</button>
+                </form>
+            </div>
+
+            <!-- Gear Button -->
+            <div class="col">
+                <form th:action="@{offers-gear}" th:method="GET">
+                    <button type="submit" class="btn btn-primary equal-width-btn">Gear</button>
+                </form>
+            </div>
+
+            <!-- Clothes Button -->
+            <div class="col">
+                <form th:action="@{offers-clothes}">
+                    <button type="submit" class="btn btn-primary equal-width-btn">Clothes</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="row card-margin-top">
+            <div th:each="offer : ${allClothes}" class="col-md-4">
+                <div class="card">
+                    <img th:src="${offer.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
+                    <div class="card-body">
+                        <h5 class="card-text my-offers-text-color" th:text="${offer.getDescription()}"></h5>
+                        <p class="card-text my-offers-text-color" th:text="${offer.getCategory()}"></p>
+                        <p class="card-title my-offers-text-color" th:text="${offer.getBrand()}"></p>
+                        <p class="card-text my-offers-text-color">
+                            Price:&nbsp; <span th:text="${offer.getPrice()}"></span>&nbsp;bgn
+                        </p>
+
+                        <form th:action="@{/product-buy}" th:method="POST">
+                            <input type="hidden" name="productId" th:value="${offer.getId()}">
+                            <button type="submit" class="btn btn-primary btn-block">Buy</button>
+                        </form>
+
+                        <form th:action="@{/product-details/{id}(id=${offer.getId()})}" th:method="GET">
+                            <input type="hidden" name="productId" th:value="${offer.getId()}">
+                            <button type="submit" class="btn btn-primary btn-block btn-details-offer">Details</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
 </html>

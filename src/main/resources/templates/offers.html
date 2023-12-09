@@ -8,9 +8,34 @@
 
     <div class="container bg-blur rounded mt-3 mb-4">
         <h1>All offers</h1>
+        <!-- Buttons Row -->
+        <div class="row mb-3">
+            <!-- Supplements Button -->
+            <div class="col">
+                <form th:action="@{offers-supplements}" th:method="GET">
+                    <button type="submit" class="btn btn-primary equal-width-btn">Supplements</button>
+                </form>
+            </div>
+
+            <!-- Gear Button -->
+            <div class="col">
+                <form th:action="@{offers-gear}" th:method="GET">
+                    <button type="submit" class="btn btn-primary equal-width-btn">Gear</button>
+                </form>
+            </div>
+
+            <!-- Clothes Button -->
+            <div class="col">
+                <form th:action="@{offers-clothes}">
+                    <button type="submit" class="btn btn-primary equal-width-btn">Clothes</button>
+                </form>
+            </div>
+        </div>
+
+
         <div class="row">
             <div th:each="offer : ${allOffers}" class="col-md-4">
-                <div class="card">
+                <div class="card card-margin-top">
                     <img th:src="${offer.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
                     <div class="card-body">
                         <h5 class="card-text my-offers-text-color" th:text="${offer.getDescription()}"></h5>

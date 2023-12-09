@@ -19,7 +19,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/adminPanel")
+    @GetMapping("/admin-panel")
     public ModelAndView adminPanel(){
         ModelAndView modelAndView = new ModelAndView("admin-panel");
 
@@ -29,7 +29,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    @PostMapping("/removeUser")
+    @PostMapping("/remove-user")
     public ModelAndView removeUser(@RequestParam("userId") Long userId){
 
         ModelAndView modelAndView = new ModelAndView();
@@ -40,6 +40,5 @@ public class AdminController {
         return modelAndView;
 
     }
-
 
 }

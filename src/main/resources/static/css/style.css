@@ -170,3 +170,11 @@ footer {
     object-fit: contain; /* Ensures the entire image fits within the area */
     object-position: center; /* Centers the image within the element */
 }
+
+.card-margin-top{
+    margin-top: 15px;
+}
+
+.equal-width-btn{
+    width: 100%;
+}

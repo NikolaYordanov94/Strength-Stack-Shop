@@ -93,7 +93,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("offers-gear");
 
         modelAndView.addObject("allGear", productService.getAllGear());
-        
+
         return modelAndView;
     }
 
