@@ -7,42 +7,72 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h1>Product details</h1>
-            <p th:text="${currentProduct.getCreatedAt()}"></p>
-            <div th:each="comment : ${currentProduct.getComments()}">
-                <p th:text="${comment.description}"></p>
+    <div class="container mt-4">
+
+        <!-- Product Details Card -->
+        <div class="card mb-4 product-card">
+            <div class="card-body">
+                <h1 class="card-title">Product Details</h1>
+                <p class="card-text">
+                    Added on:&nbsp; <span th:text="${currentProduct.getCreatedAt()}"></span>
+                </p>
+
+                <p class="card-text">
+                    Total comments:&nbsp; <span th:text="${currentProduct.getComments().size()}"></span>
+                </p>
+
+                <p class="card-text">
+                    Total orders:&nbsp; <span th:text="${currentProduct.getOrders().size()}"></span>
+                </p>
             </div>
-
-            <form id="commentForm" th:method="POST"
-                  th:action="@{/comment-create}" th:object="${commentCreateBindingModel}">
-                <input type="hidden" name="productId" th:value="${currentProduct.getId()}">
-                <div class="form-group">
-                    <h4>Leave a comment</h4>
-                    <label for="message">Message</label>
-                    <textarea th:field="*{description}"
-                              th:errorclass="bg-danger"
-                              id="message"
-                              cols="30"
-                              rows="5"
-                              class="form-control"
-                              style="background-color: white;"></textarea>
-                    <small th:if="${#fields.hasErrors('description')}"
-                           th:errors="*{description}" class="text-danger">Description error message</small>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit"
-                           class="btn"
-                           id="postComment"
-                           value="Post Comment"/>
-                </div>
-            </form>
-
         </div>
-    </div>
 
+        <!-- Comments Section -->
+        <div class="mb-4 product-card">
+            <div class="card mb-4 product-card">
+                <h2>Comments</h2>
+            </div>
+            <div th:each="comment : ${currentProduct.getComments()}">
+
+                <!-- Individual Comment Card -->
+                    <div class="card-body product-card">
+                        <p class="card-text" th:text="${comment.description}"> span</p>
+                        <p class="card-text" th:text="${comment.getUser().getUsername()}"></p>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="card">
+            <div class="card-body product-card">
+                <form id="commentForm" th:method="POST"
+                      th:action="@{/comment-create}" th:object="${commentCreateBindingModel}">
+                    <input type="hidden" name="productId" th:value="${currentProduct.getId()}">
+                    <div class="form-group">
+                        <h4>Leave a comment</h4>
+                        <label for="message">Message</label>
+                        <textarea th:field="*{description}"
+                                  th:errorclass="bg-danger"
+                                  id="message"
+                                  cols="30"
+                                  rows="5"
+                                  class="form-control"
+                                  style="background-color: white;"></textarea>
+                        <small th:if="${#fields.hasErrors('description')}"
+                               th:errors="*{description}" class="text-danger">Description error message</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit"
+                               class="btn btn-primary"
+                               id="postComment"
+                               value="Post Comment"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
 </main>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
