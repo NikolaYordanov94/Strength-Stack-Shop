@@ -25,7 +25,7 @@
                             <button type="submit" class="btn btn-primary btn-block">Buy</button>
                         </form>
 
-                        <form th:action="@{/product-details}" th:method="GET">
+                        <form th:action="@{/product-details/{id}(id=${offer.getId()})}" th:method="GET">
                             <input type="hidden" name="productId" th:value="${offer.getId()}">
                             <button type="submit" class="btn btn-primary btn-block btn-details-offer">Details</button>
                         </form>

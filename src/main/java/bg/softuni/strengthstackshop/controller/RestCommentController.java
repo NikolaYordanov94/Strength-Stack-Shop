@@ -16,9 +16,9 @@
 //        this.commentService = commentService;
 //    }
 //
-//    @GetMapping("/product-details/view/{id}")
-//    public ResponseEntity<Product> getProductDetails(@PathVariable("id") Long id) {
-//        Product currentProduct = commentService.findProductById(id);
+//    @GetMapping("/product-details/{productId}")
+//    public ResponseEntity<Product> getProductDetails(@PathVariable("productId") Long productId) {
+//        Product currentProduct = commentService.findProductById(productId);
 //        return ResponseEntity.ok(currentProduct);
 //    }
 //}

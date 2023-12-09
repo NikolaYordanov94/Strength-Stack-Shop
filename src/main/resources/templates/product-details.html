@@ -34,6 +34,7 @@
             </div>
             <div th:each="comment : ${currentProduct.getComments()}">
 
+
                 <!-- Individual Comment Card -->
                     <div class="card-body product-card">
                         <p class="card-text" th:text="${comment.description}"> span</p>

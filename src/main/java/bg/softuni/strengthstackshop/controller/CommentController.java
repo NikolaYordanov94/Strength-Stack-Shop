@@ -6,10 +6,7 @@ import bg.softuni.strengthstackshop.service.CommentService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -23,8 +20,8 @@ public class CommentController {
     }
 
 
-    @GetMapping("/product-details")
-    public ModelAndView productDetails(@RequestParam ("productId") Long productId,
+    @GetMapping("/product-details/{productId}")
+    public ModelAndView productDetails(@PathVariable("productId") Long productId,
                                        @ModelAttribute("commentCreateBindingModel")
                                        CommentCreateBindingModel commentCreateBindingModel){
         ModelAndView modelAndView = new ModelAndView();
