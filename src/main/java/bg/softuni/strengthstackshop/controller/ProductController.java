@@ -79,4 +79,31 @@ public class ProductController {
         return modelAndView;
     }
 
+    @GetMapping("/offers-supplements")
+    public ModelAndView allSupplements(){
+        ModelAndView modelAndView = new ModelAndView("offers-supplements");
+
+        modelAndView.addObject("allSupplements", productService.getAllSupplements());
+
+        return modelAndView;
+    }
+
+    @GetMapping("/offers-gear")
+    public ModelAndView allGear(){
+        ModelAndView modelAndView = new ModelAndView("offers-gear");
+
+        modelAndView.addObject("allGear", productService.getAllGear());
+        
+        return modelAndView;
+    }
+
+    @GetMapping("/offers-clothes")
+    public ModelAndView allClothes(){
+        ModelAndView modelAndView = new ModelAndView("offers-clothes");
+
+        modelAndView.addObject("allClothes", productService.getAllClothes());
+
+        return modelAndView;
+    }
+
 }

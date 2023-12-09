@@ -12,5 +12,11 @@ public interface ProductService {
 
     List<ProductViewDTO> getAllProducts();
 
+    List<ProductViewDTO> getAllSupplements();
+
+    List<ProductViewDTO> getAllGear();
+
+    List<ProductViewDTO> getAllClothes();
+
     Product findById(Long productId);
 }
