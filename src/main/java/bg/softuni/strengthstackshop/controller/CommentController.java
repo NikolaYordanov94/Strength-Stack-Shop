@@ -22,10 +22,8 @@ public class CommentController {
 
     @GetMapping("/product-details/{productId}")
     public ModelAndView productDetails(@PathVariable("productId") Long productId,
-                                       @ModelAttribute("commentCreateBindingModel")
-                                       CommentCreateBindingModel commentCreateBindingModel){
+                                       @ModelAttribute("commentCreateBindingModel") CommentCreateBindingModel commentCreateBindingModel) {
         ModelAndView modelAndView = new ModelAndView();
-
         Product currentProduct = commentService.findProductById(productId);
 
         modelAndView.setViewName("product-details");
@@ -35,23 +33,21 @@ public class CommentController {
     }
 
     @PostMapping("/comment-create")
-    public ModelAndView createComment(@RequestParam ("productId") Long productId,
-                                      @ModelAttribute("commentCreateBindingModel")
-                                      @Valid CommentCreateBindingModel commentCreateBindingModel,
-                                      BindingResult bindingResult, Principal principal){
+    public ModelAndView createComment(@RequestParam("productId") Long productId,
+                                      @ModelAttribute("commentCreateBindingModel") @Valid CommentCreateBindingModel commentCreateBindingModel,
+                                      BindingResult bindingResult, Principal principal) {
         ModelAndView modelAndView = new ModelAndView();
-        Product currentProduct = commentService.findProductById(productId);
-        modelAndView.addObject("currentProduct", currentProduct);
 
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("product-details");
+            modelAndView.addObject("currentProduct", commentService.findProductById(productId));
             return modelAndView;
         }
 
-         commentService.createComment(commentCreateBindingModel, principal.getName(), productId);
+        commentService.createComment(commentCreateBindingModel, principal.getName(), productId);
 
-        modelAndView.setViewName("redirect:/offers");
-        return modelAndView;
+        // Redirect to the product-details view for the current product ID
+        return new ModelAndView("redirect:/product-details/" + productId);
     }
 
 }
