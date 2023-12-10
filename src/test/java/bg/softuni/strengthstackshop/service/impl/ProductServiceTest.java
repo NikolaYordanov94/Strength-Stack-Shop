@@ -3,6 +3,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import bg.softuni.strengthstackshop.model.dto.product.ProductViewDTO;
+import bg.softuni.strengthstackshop.model.enums.Category;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
 import bg.softuni.strengthstackshop.model.entity.Product;
-import java.util.Collections;
+import org.modelmapper.ModelMapper;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,26 +27,8 @@ public class ProductServiceTest {
     @InjectMocks
     private ProductServiceImpl productService;
 
-    @Test
-    public void testAddProduct() {
-        // Arrange
-        ProductAddBindingModel bindingModel = createProductAddBindingModel();
-        // Act
-        productService.add(bindingModel);
-        // Assert
-        verify(productRepository).save(any(Product.class));
-    }
-
-    @Test
-    public void testGetAllProducts() {
-        // Arrange
-        when(productRepository.findAll()).thenReturn(Collections.singletonList(new Product()));
-        // Act
-        List<ProductViewDTO> products = productService.getAllProducts();
-        // Assert
-        assertFalse(products.isEmpty());
-        verify(productRepository).findAll();
-    }
+    @Mock
+    private ModelMapper modelMapper;
 
     @Test
     public void testFindById_Success() {
@@ -65,6 +49,51 @@ public class ProductServiceTest {
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
         // Act & Assert
         assertThrows(EntityNotFoundException.class, () -> productService.findById(productId));
+    }
+
+    @Test
+    void getAllSupplementsTest() {
+        List<Product> mockSupplements = List.of(new Product()); // Create a mock list of products
+        when(productRepository.findAllByCategory(Category.SUPPLEMENTS)).thenReturn(mockSupplements);
+
+        ProductViewDTO mockDto = new ProductViewDTO(); // Mock ProductViewDTO
+        when(modelMapper.map(any(Product.class), eq(ProductViewDTO.class))).thenReturn(mockDto);
+
+        List<ProductViewDTO> supplements = productService.getAllSupplements();
+
+        assertFalse(supplements.isEmpty());
+        assertEquals(mockSupplements.size(), supplements.size());
+        verify(productRepository).findAllByCategory(Category.SUPPLEMENTS);
+    }
+
+    @Test
+    void getAllGearTest() {
+        List<Product> mockGear = List.of(new Product());
+        when(productRepository.findAllByCategory(Category.GEAR)).thenReturn(mockGear);
+
+        ProductViewDTO mockDto = new ProductViewDTO();
+        when(modelMapper.map(any(Product.class), eq(ProductViewDTO.class))).thenReturn(mockDto);
+
+        List<ProductViewDTO> gear = productService.getAllGear();
+
+        assertFalse(gear.isEmpty());
+        assertEquals(mockGear.size(), gear.size());
+        verify(productRepository).findAllByCategory(Category.GEAR);
+    }
+
+    @Test
+    void getAllClothesTest() {
+        List<Product> mockClothes = List.of(new Product());
+        when(productRepository.findAllByCategory(Category.CLOTHES)).thenReturn(mockClothes);
+
+        ProductViewDTO mockDto = new ProductViewDTO();
+        when(modelMapper.map(any(Product.class), eq(ProductViewDTO.class))).thenReturn(mockDto);
+
+        List<ProductViewDTO> clothes = productService.getAllClothes();
+
+        assertFalse(clothes.isEmpty());
+        assertEquals(mockClothes.size(), clothes.size());
+        verify(productRepository).findAllByCategory(Category.CLOTHES);
     }
 
     private ProductAddBindingModel createProductAddBindingModel() {

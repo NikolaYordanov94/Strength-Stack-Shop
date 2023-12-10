@@ -3,6 +3,7 @@ package bg.softuni.strengthstackshop.service.impl;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import bg.softuni.strengthstackshop.model.dto.order.OrderHomeViewDTO;
 import bg.softuni.strengthstackshop.model.entity.Order;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.entity.User;
@@ -10,15 +11,20 @@ import bg.softuni.strengthstackshop.repository.OrderRepository;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.antlr.v4.runtime.atn.SemanticContext;
+import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
+
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,6 +38,9 @@ public class OrderServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private ModelMapper modelMapper;
 
     @InjectMocks
     private OrderServiceImpl orderService;
@@ -182,4 +191,49 @@ public class OrderServiceTest {
         assertNotNull(foundOrder);
         assertEquals(order, foundOrder);
     }
+
+    @Test
+    public void testFindOrderByUsername(){
+        List<Order> orderList = new ArrayList<>();
+        OrderHomeViewDTO orderHomeViewDTO = new OrderHomeViewDTO();
+
+        for (int i = 0; i < 3; i++) {
+            orderList.add(new Order());
+        }
+        //Arrange
+        when(orderRepository.findByUserUsername("Pesho"))
+                .thenReturn(orderList);
+
+        when(modelMapper.map(any(Order.class), eq(OrderHomeViewDTO.class)))
+                .thenReturn(orderHomeViewDTO);
+
+        //Act
+        List<OrderHomeViewDTO> orderHomeViewDTOList = orderService
+                .findOrdersByUsername("Pesho");
+
+        //Assert
+        assertEquals(3, orderHomeViewDTOList.size());
+
+    }
+
+    @Test
+    public void testFindOrderById_NotNull(){
+        Order order = new Order();
+        order.setId(2);
+        OrderHomeViewDTO orderHomeViewDTO = new OrderHomeViewDTO();
+
+        //Arrange
+        when(orderRepository.findById(order.getId()))
+                .thenReturn(Optional.of(order));
+        when(modelMapper.map(any(Order.class), eq(OrderHomeViewDTO.class)))
+                .thenReturn(orderHomeViewDTO);
+
+        //Act
+        OrderHomeViewDTO orderHomeViewDTOResul = orderService
+                .findOrderById(order.getId());
+
+        //Assert
+        assertNotNull(orderHomeViewDTOResul);
+    }
+
 }

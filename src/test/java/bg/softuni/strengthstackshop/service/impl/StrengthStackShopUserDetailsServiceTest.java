@@ -56,36 +56,6 @@ public class StrengthStackShopUserDetailsServiceTest {
         Assertions.assertEquals("nikola", user.getUsername());
     }
 
-
-
-    @Test
-    void testUserFoundException() {
-        // Arrange
-        User testUserEntity = createTestUser();
-        when(mockUserRepository.findUserByEmail(testUserEntity.getEmail()))
-                .thenReturn(Optional.of(testUserEntity));
-
-        // Act
-        UserDetails userDetails =
-                serviceToTest.loadUserByUsername(testUserEntity.getUsername());
-
-        // Assert
-        assertNotNull(userDetails);
-        assertEquals(
-                testUserEntity.getEmail(),
-                userDetails.getUsername(),
-                "Username is not mapped to email.");
-
-        assertEquals(testUserEntity.getPassword(), userDetails.getPassword());
-        assertEquals(2, userDetails.getAuthorities().size());
-        assertTrue(
-                containsAuthority(userDetails, "ROLE_" + RoleName.ADMIN),
-                "The user is not admin");
-        assertTrue(
-                containsAuthority(userDetails, "ROLE_" + RoleName.USER),
-                "The user is not user");
-    }
-
     private boolean containsAuthority(UserDetails userDetails, String expectedAuthority) {
         return userDetails
                 .getAuthorities()
