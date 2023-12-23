@@ -40,7 +40,7 @@ public class UserServiceTest {
     private UserServiceImpl userService;
 
     @Test
-    public void testSaveUser(){
+    void testSaveUser(){
         User user = new User();
 
         user.setUsername("testUser");
@@ -54,7 +54,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindByUsername_UserFound() {
+    void testFindByUsername_UserFound() {
         // Arrange
         String username = "testuser";
         User user = new User();
@@ -70,7 +70,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindByUsername_UserNotFound() {
+    void testFindByUsername_UserNotFound() {
         // Arrange
         String username = "testuser";
         when(userRepository.findByUsername(username)).thenReturn(Optional.empty());
@@ -80,7 +80,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testExistsByEmail() {
+    void testExistsByEmail() {
         // Arrange
         String email = "test@example.com";
         when(userRepository.findUserByEmail(email)).thenReturn(Optional.of(new User()));
@@ -93,7 +93,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testExistsByPhoneNumber() {
+    void testExistsByPhoneNumber() {
         // Arrange
         String phoneNumber = "1234567890";
         when(userRepository.findUserByPhoneNumber(phoneNumber)).thenReturn(Optional.of(new User()));
@@ -106,7 +106,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testExistsByUsername() {
+    void testExistsByUsername() {
         // Arrange
         String username = "testuser";
         when(userRepository.findUserByUsername(username)).thenReturn(Optional.of(new User()));
@@ -120,7 +120,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void testRegisterWhenPasswordEncoderThrowsException() {
+    void testRegisterWhenPasswordEncoderThrowsException() {
         // Arrange
         UserRegisterBindingModel model = createUserRegisterBindingModel();
         when(passwordEncoder.encode(anyString())).thenThrow(new RuntimeException("Test exception"));
@@ -131,13 +131,13 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindByUsernameWithNullInput() {
+    void testFindByUsernameWithNullInput() {
         // Act & Assert
         assertThrows(UsernameNotFoundException.class, () -> userService.findByUsername(null));
     }
 
     @Test
-    public void testExistsByEmailWithNullInput() {
+    void testExistsByEmailWithNullInput() {
         // Arrange & Act
         boolean result = userService.existsByEmail(null);
 
@@ -146,7 +146,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testExistsByPhoneNumberWithNullInput() {
+    void testExistsByPhoneNumberWithNullInput() {
         // Arrange & Act
         boolean result = userService.existsByPhoneNumber(null);
 
@@ -155,7 +155,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testExistsByUsernameWithNullInput() {
+    void testExistsByUsernameWithNullInput() {
         // Arrange & Act
         boolean result = userService.existsByUsername(null);
 

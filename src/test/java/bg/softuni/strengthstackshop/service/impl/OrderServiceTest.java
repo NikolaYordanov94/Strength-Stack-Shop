@@ -11,8 +11,6 @@ import bg.softuni.strengthstackshop.repository.OrderRepository;
 import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.antlr.v4.runtime.atn.SemanticContext;
-import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,7 +44,7 @@ public class OrderServiceTest {
     private OrderServiceImpl orderService;
 
     @Test
-    public void testFindOrCreateActiveOrder_ExistingActive() {
+    void testFindOrCreateActiveOrder_ExistingActive() {
         // Arrange
         User user = new User();
         Order activeOrder = new Order();
@@ -61,7 +59,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testFindOrCreateActiveOrder_NoActiveCreateNew() {
+    void testFindOrCreateActiveOrder_NoActiveCreateNew() {
         // Arrange
         User user = new User();
         user.setOrders(new ArrayList<>());
@@ -77,7 +75,7 @@ public class OrderServiceTest {
         verify(orderRepository).save(any(Order.class));
     }
     @Test
-    public void testDeactivateCurrentActiveOrder() {
+    void testDeactivateCurrentActiveOrder() {
         // Arrange
         User user = new User();
         Order activeOrder = new Order();
@@ -95,7 +93,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testSaveOrderProduct() {
+    void testSaveOrderProduct() {
         // Arrange
         Order order = new Order();
         Product product = new Product();
@@ -109,7 +107,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testRemoveProductFromOrder_ProductExists() {
+    void testRemoveProductFromOrder_ProductExists() {
         // Arrange
         Long productId = 1L;
         Order order = new Order();
@@ -134,7 +132,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testFindActiveOrder_ActiveOrderExists() {
+    void testFindActiveOrder_ActiveOrderExists() {
         // Arrange
         Principal principal = mock(Principal.class);
         when(principal.getName()).thenReturn("username");
@@ -151,7 +149,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testFindActiveOrder_NoActiveOrderThrows() {
+    void testFindActiveOrder_NoActiveOrderThrows() {
         // Arrange
         Principal principal = mock(Principal.class);
         when(principal.getName()).thenReturn("username");
@@ -162,7 +160,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testFindCurrentUserByUsername_UserFound() {
+    void testFindCurrentUserByUsername_UserFound() {
         // Arrange
         Principal principal = mock(Principal.class);
         when(principal.getName()).thenReturn("username");
@@ -178,7 +176,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testFindCurrentOrderById_OrderFound() {
+    void testFindCurrentOrderById_OrderFound() {
         // Arrange
         Long orderId = 1L;
         Order order = new Order();
@@ -193,7 +191,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testFindOrderByUsername(){
+    void testFindOrderByUsername(){
         List<Order> orderList = new ArrayList<>();
         OrderHomeViewDTO orderHomeViewDTO = new OrderHomeViewDTO();
 
@@ -217,7 +215,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testFindOrderById_NotNull(){
+    void testFindOrderById_NotNull(){
         Order order = new Order();
         order.setId(2);
         OrderHomeViewDTO orderHomeViewDTO = new OrderHomeViewDTO();
