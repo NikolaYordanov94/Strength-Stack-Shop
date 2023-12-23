@@ -44,6 +44,7 @@ public class Product extends BaseEntity{
     private List<Comment> comments;
 
     public Product() {
+        //empty constructor
     }
 
     public BigDecimal getPrice() {

@@ -25,6 +25,7 @@ public class Comment extends BaseEntity{
     private Product product;
 
     public Comment() {
+        //empty constructor
     }
 
     public String getDescription() {
