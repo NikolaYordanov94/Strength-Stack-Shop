@@ -19,7 +19,7 @@ public class UserRegisterBindingModel {
     @UniqueEmail
     private String email;
 
-    @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Invalid phone number")
+    @Pattern(regexp = "^[+]?\\d{10,15}$", message = "Invalid phone number")
     @UniquePhoneNumber
     private String phoneNumber;
 

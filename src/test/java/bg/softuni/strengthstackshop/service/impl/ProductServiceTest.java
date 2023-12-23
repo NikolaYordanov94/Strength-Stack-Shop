@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductServiceTest {
+class ProductServiceTest {
 
     @Mock
     private ProductRepository productRepository;
@@ -31,7 +31,7 @@ public class ProductServiceTest {
     private ModelMapper modelMapper;
 
     @Test
-    public void testFindById_Success() {
+    void testFindById_Success() {
         // Arrange
         Long productId = 1L;
         Product product = new Product();
@@ -43,7 +43,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testFindById_NotFound() {
+    void testFindById_NotFound() {
         // Arrange
         Long productId = 1L;
         when(productRepository.findById(productId)).thenReturn(Optional.empty());

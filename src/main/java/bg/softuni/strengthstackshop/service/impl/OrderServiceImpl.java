@@ -27,10 +27,10 @@ public class OrderServiceImpl implements OrderService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository, UserRepository userRepository1, ModelMapper modelMapper) {
+    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
-        this.userRepository = userRepository1;
+        this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
 
