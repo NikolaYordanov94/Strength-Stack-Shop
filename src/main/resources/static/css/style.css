@@ -77,9 +77,6 @@ footer {
     border-radius: 5px;
 }
 
-#big-div{
-}
-
 .badge-secondary{
     background-color: #720a75;
 }
@@ -100,11 +97,6 @@ footer {
     color: #FFB74D;
 }
 
-.product-info {
-    color: #FFB74D; /* Darker text color for contrast */
-    margin-bottom: 10px; /* Space between text elements */
-}
-
 .order-info {
     background-color: #343a40; /* Slightly darker background for order info */
     padding: 15px;
@@ -123,6 +115,8 @@ footer {
 }
 
 .product-info{
+    color: #FFB74D; /* Darker text color for contrast */
+    margin-bottom: 10px; /* Space between text elements */
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center;     /* Center vertically */

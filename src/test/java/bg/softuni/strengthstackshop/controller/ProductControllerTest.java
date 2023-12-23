@@ -40,7 +40,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser
-    public void testAllProductsView() throws Exception {
+    void testAllProductsView() throws Exception {
         mockMvc.perform(get("/offers"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("offers"))
@@ -49,7 +49,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser
-    public void testAllSupplementsView() throws Exception {
+    void testAllSupplementsView() throws Exception {
 
         mockMvc.perform(get("/offers-supplements"))
                 .andExpect(status().isOk())
@@ -59,7 +59,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser // Use this annotation if the endpoint requires authenticated users
-    public void testAllGearView() throws Exception {
+    void testAllGearView() throws Exception {
         // Mock the response from productService.getAllGear()
         // If necessary, use when(productService.getAllGear()).thenReturn(...);
 
@@ -71,7 +71,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser // Use this annotation if the endpoint requires authenticated users
-    public void testAllClothesView() throws Exception {
+    void testAllClothesView() throws Exception {
         // Mock the response from productService.getAllClothes()
         // If necessary, use when(productService.getAllClothes()).thenReturn(...);
 
@@ -83,7 +83,7 @@ class ProductControllerTest {
 
     @Test
     @WithMockUser(username = "adminUser", roles = {"ADMIN", "USER"})
-    public void testPostAddProductSuccess() throws Exception {
+    void testPostAddProductSuccess() throws Exception {
         mockMvc.perform(post("/product-add")
                                 .with(csrf()) // Include CSRF token
                                 .param("price", "10.00")
