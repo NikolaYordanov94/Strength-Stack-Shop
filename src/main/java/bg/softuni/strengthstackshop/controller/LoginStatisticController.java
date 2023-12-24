@@ -4,6 +4,7 @@ import bg.softuni.strengthstackshop.util.LoginStatisticInterceptor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -17,7 +18,7 @@ public class LoginStatisticController {
         this.loginStatisticInterceptor = loginStatisticInterceptor;
     }
 
-    @RequestMapping("/login-statistic")
+    @GetMapping("/login-statistic")
     public String loginStatistics(Model model, Principal principal) {
         if (isAdmin(principal)) {
             model.addAttribute("loginCounts", loginStatisticInterceptor.getLoginCountMap());

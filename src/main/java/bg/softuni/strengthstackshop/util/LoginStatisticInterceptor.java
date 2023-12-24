@@ -41,7 +41,9 @@ public class LoginStatisticInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
             throws Exception {
-
+        // This method is intentionally left blank because post-processing logic is not required
+        // in the current context of this interceptor.
+        // The necessary actions are performed in the preHandle method.
     }
 
     @Override
