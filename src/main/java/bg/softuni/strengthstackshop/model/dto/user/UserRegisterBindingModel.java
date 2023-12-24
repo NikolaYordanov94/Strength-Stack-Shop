@@ -1,7 +1,7 @@
 package bg.softuni.strengthstackshop.model.dto.user;
 
 import bg.softuni.strengthstackshop.validation.email.UniqueEmail;
-import bg.softuni.strengthstackshop.validation.phoneNumber.UniquePhoneNumber;
+import bg.softuni.strengthstackshop.validation.phone_number.UniquePhoneNumber;
 import bg.softuni.strengthstackshop.validation.username.UniqueUsername;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

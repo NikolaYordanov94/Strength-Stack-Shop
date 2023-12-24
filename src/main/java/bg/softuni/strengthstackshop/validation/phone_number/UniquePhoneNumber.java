@@ -1,4 +1,4 @@
-package bg.softuni.strengthstackshop.validation.phoneNumber;
+package bg.softuni.strengthstackshop.validation.phone_number;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
