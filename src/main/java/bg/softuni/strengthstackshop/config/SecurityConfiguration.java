@@ -15,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
+    private static final String USER_LOGIN_URL = "/user/login";
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
@@ -22,13 +24,13 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/user/login", "/user/register", "/user/login-error", "/contacts", "/product-details/**").permitAll()
+                        .requestMatchers("/", USER_LOGIN_URL, "/user/register", "/user/login-error", "/contacts", "/product-details/**").permitAll()
                         .requestMatchers("/product-add", "/admin-panel", "/remove-user").hasRole(RoleName.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin -> {
                     formLogin
-                            .loginPage("/user/login")
+                            .loginPage(USER_LOGIN_URL)
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .defaultSuccessUrl("/home", true)
@@ -38,7 +40,7 @@ public class SecurityConfiguration {
                 logout -> {
                     logout
                             .logoutUrl("/user/logout")
-                            .logoutSuccessUrl("/user/login")
+                            .logoutSuccessUrl(USER_LOGIN_URL)
                             .invalidateHttpSession(true);
                 }
         );

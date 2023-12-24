@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
 
+    private static final String REGISTER_VIEW_NAME = "register";
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -40,7 +41,7 @@ public class UserController {
     public ModelAndView register(
             @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel){
 
-        return new ModelAndView("register");
+        return new ModelAndView(REGISTER_VIEW_NAME);
 
     }
 
@@ -50,13 +51,13 @@ public class UserController {
             BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("register");
+            return new ModelAndView(REGISTER_VIEW_NAME);
         }
 
         boolean hasSuccessfulRegistration = userService.register(userRegisterBindingModel);
 
         if(!hasSuccessfulRegistration){
-            ModelAndView modelAndView = new ModelAndView("register");
+            ModelAndView modelAndView = new ModelAndView(REGISTER_VIEW_NAME);
             modelAndView.addObject("hasRegistrationError", true);
             return modelAndView;
         }

@@ -1,8 +1,4 @@
 package bg.softuni.strengthstackshop.controller;
-
-import bg.softuni.strengthstackshop.model.entity.Product;
-import bg.softuni.strengthstackshop.service.CommentService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

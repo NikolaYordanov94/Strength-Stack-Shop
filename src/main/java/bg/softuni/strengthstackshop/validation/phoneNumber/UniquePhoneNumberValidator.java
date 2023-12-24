@@ -13,10 +13,6 @@ public class UniquePhoneNumberValidator implements ConstraintValidator<UniquePho
     }
 
     @Override
-    public void initialize(UniquePhoneNumber phoneNumber) {
-    }
-
-    @Override
     public boolean isValid(String phoneNumber, ConstraintValidatorContext context) {
         return !userService.existsByPhoneNumber(phoneNumber);
     }
