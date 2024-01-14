@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", USER_LOGIN_URL, "/user/register", "/user/login-error", "/contacts", "/product-details/**").permitAll()
+                        .requestMatchers("/", USER_LOGIN_URL, "/user/register", "/user/login-error", "/contacts", "/product-details/**", "/product-details/comments/{productId}").permitAll()
                         .requestMatchers("/product-add", "/admin-panel", "/remove-user").hasRole(RoleName.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
