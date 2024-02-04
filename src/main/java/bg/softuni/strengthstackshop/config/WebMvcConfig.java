@@ -23,10 +23,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Apply to all endpoints
-                .allowedOrigins("http://localhost:8080/product-details/comments") // Allowed origins
+                .allowedOrigins("http://localhost:8080") // The origin your front-end is served from
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Allowed methods
-                .allowedHeaders("*") // Allowed headers
-                .allowCredentials(true) // Credentials allowed
+                .allowedHeaders("Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers") // Specific allowed headers
+                .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials") // Headers to expose to the client
+                .allowCredentials(true) // Credentials allowed (cookies, authorization headers, etc.)
                 .maxAge(3600); // Max age for the browser to cache the preflight response
     }
 

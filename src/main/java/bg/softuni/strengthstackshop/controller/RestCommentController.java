@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080/product-details/comments")
+@CrossOrigin(origins = "http://localhost:8080")
 public class RestCommentController {
 
     private final CommentService commentService;
