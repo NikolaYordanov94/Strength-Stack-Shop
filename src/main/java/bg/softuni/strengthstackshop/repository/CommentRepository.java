@@ -13,4 +13,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Optional<List<Comment>> findAllByCommentDateBefore(LocalDateTime dateBefore);
 
+    List<Comment> findAllByProduct_id(Long id);
+
 }

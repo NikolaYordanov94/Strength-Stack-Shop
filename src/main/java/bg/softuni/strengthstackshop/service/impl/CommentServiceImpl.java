@@ -1,6 +1,7 @@
 package bg.softuni.strengthstackshop.service.impl;
 
 import bg.softuni.strengthstackshop.model.dto.comment.CommentCreateBindingModel;
+import bg.softuni.strengthstackshop.model.dto.comment.CommentShowDTO;
 import bg.softuni.strengthstackshop.model.entity.Comment;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.entity.User;
@@ -9,6 +10,7 @@ import bg.softuni.strengthstackshop.repository.ProductRepository;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.CommentService;
 import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,11 +24,13 @@ public class CommentServiceImpl implements CommentService {
     private final ProductRepository productRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
-    public CommentServiceImpl(ProductRepository productRepository, CommentRepository commentRepository, UserRepository userRepository) {
+    public CommentServiceImpl(ProductRepository productRepository, CommentRepository commentRepository, UserRepository userRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -63,5 +67,15 @@ public class CommentServiceImpl implements CommentService {
         if (!oldComments.isEmpty()) {
             commentRepository.deleteAll(oldComments);
         }
+    }
+
+    @Override
+    public List<CommentShowDTO> findCommentsByProductId(Long id) {
+
+        return commentRepository.findAllByProduct_id(id)
+                .stream()
+                .map(comment -> modelMapper.map(comment, CommentShowDTO.class))
+                .toList();
+
     }
 }
