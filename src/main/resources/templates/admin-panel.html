@@ -20,6 +20,18 @@
                 <button type="submit" class="btn btn-danger">Remove user</button>
             </form>
 
+            <form th:action="@{/change-role-to-admin}" th:method="POST" class="btn-remove-product">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                <input type="hidden" name="userId" th:value="${user.getId()}" />
+                <button type="submit" class="btn btn-danger">Change user to admin</button>
+            </form>
+
+            <form th:action="@{/change-role-to-user}" th:method="POST" class="btn-remove-product">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                <input type="hidden" name="userId" th:value="${user.getId()}" />
+                <button type="submit" class="btn btn-danger">Change admin to user</button>
+            </form>
+
         </div>
 
     </div>

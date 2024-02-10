@@ -41,4 +41,26 @@ public class AdminController {
 
     }
 
+    @PostMapping("/change-role-to-admin")
+    public ModelAndView changeRoleToAdmin(@RequestParam("userId") Long userId){
+
+        ModelAndView modelAndView = new ModelAndView();
+        adminService.changeRoleToAdmin(userId);
+
+        modelAndView.setViewName("redirect:/admin-panel");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/change-role-to-user")
+    public ModelAndView changeRoleToUser(@RequestParam("userId") Long userId){
+
+        ModelAndView modelAndView = new ModelAndView();
+        adminService.changeRoleToUser(userId);
+
+        modelAndView.setViewName("redirect:/admin-panel");
+
+        return modelAndView;
+    }
+
 }

@@ -9,4 +9,8 @@ public interface AdminService {
 
     void removeUserById(Long id);
 
+    void changeRoleToAdmin(Long id);
+
+    void changeRoleToUser(Long id);
+
 }

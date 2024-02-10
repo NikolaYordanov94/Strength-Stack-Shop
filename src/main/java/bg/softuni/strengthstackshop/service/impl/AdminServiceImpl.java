@@ -2,6 +2,7 @@ package bg.softuni.strengthstackshop.service.impl;
 
 import bg.softuni.strengthstackshop.model.dto.user.UserAdminViewDTO;
 import bg.softuni.strengthstackshop.model.entity.User;
+import bg.softuni.strengthstackshop.model.enums.RoleName;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.AdminService;
 import jakarta.persistence.EntityNotFoundException;
@@ -42,4 +43,29 @@ public class AdminServiceImpl implements AdminService {
         user.getRoles().clear();
         userRepository.removeUserById(id);
     }
+
+    @Override
+    public void changeRoleToAdmin(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+
+        user.getRoles().forEach(role -> {
+            role.setRoleName(RoleName.ADMIN);
+        });
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void changeRoleToUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+
+        user.getRoles().forEach(role -> {
+            role.setRoleName(RoleName.USER);
+        });
+
+        userRepository.save(user);
+    }
+
 }
