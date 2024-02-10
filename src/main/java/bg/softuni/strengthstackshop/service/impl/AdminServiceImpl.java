@@ -16,9 +16,12 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
     private final UserRepository userRepository;
 
-    public AdminServiceImpl(UserRepository userRepository) {
+    private final RoleRepository roleRepository;
+
+    public AdminServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
 
+        this.roleRepository = roleRepository;
     }
 
 
@@ -26,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
     public List<UserAdminViewDTO> getAllUsers() {
         List<UserAdminViewDTO> adminViewDTOList = new ArrayList<>();
 
-        userRepository.findUsersWithOnlyUserRole().forEach(user -> {
+        userRepository.findAll().forEach(user -> {
             UserAdminViewDTO userAdminViewDTO = new UserAdminViewDTO();
             userAdminViewDTO.setUsername(user.getUsername());
             userAdminViewDTO.setId(user.getId());
@@ -51,10 +54,11 @@ public class AdminServiceImpl implements AdminService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
 
-        user.getRoles().forEach(role -> {
-            role.setRoleName(RoleName.ADMIN);
+        user.getRoles().clear();
 
-        });
+        user.getRoles()
+                .add(roleRepository
+                .findByRoleName(RoleName.ADMIN));
 
         userRepository.save(user);
     }
@@ -64,9 +68,11 @@ public class AdminServiceImpl implements AdminService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
 
-        user.getRoles().forEach(role -> {
-            role.setRoleName(RoleName.USER);
-        });
+        user.getRoles().clear();
+
+        user.getRoles()
+                .add(roleRepository
+                .findByRoleName(RoleName.USER));
 
         userRepository.save(user);
     }
