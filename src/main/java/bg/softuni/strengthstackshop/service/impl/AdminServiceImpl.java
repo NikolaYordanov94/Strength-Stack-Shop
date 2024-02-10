@@ -3,6 +3,7 @@ package bg.softuni.strengthstackshop.service.impl;
 import bg.softuni.strengthstackshop.model.dto.user.UserAdminViewDTO;
 import bg.softuni.strengthstackshop.model.entity.User;
 import bg.softuni.strengthstackshop.model.enums.RoleName;
+import bg.softuni.strengthstackshop.repository.RoleRepository;
 import bg.softuni.strengthstackshop.repository.UserRepository;
 import bg.softuni.strengthstackshop.service.AdminService;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +18,7 @@ public class AdminServiceImpl implements AdminService {
 
     public AdminServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+
     }
 
 
@@ -51,6 +53,7 @@ public class AdminServiceImpl implements AdminService {
 
         user.getRoles().forEach(role -> {
             role.setRoleName(RoleName.ADMIN);
+
         });
 
         userRepository.save(user);
