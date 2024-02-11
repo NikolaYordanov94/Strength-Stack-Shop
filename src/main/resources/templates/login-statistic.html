@@ -9,7 +9,7 @@
 <main>
 
     <div class="container bg-blur rounded mt-3 mb-4" th:each="entry : ${loginCounts}">
-        <p th:text="'Number of login for ' + ${entry.key} + ': ' + ${entry.value}"></p>
+        <p th:text="'Number of login for ' + ${entry.key} + ': ' + ${entry.value}" class="my-text-color"></p>
     </div>
 
 </main>

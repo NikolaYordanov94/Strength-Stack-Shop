@@ -172,3 +172,7 @@ footer {
 .equal-width-btn{
     width: 100%;
 }
+
+.button-spacing{
+    margin-right: 20px;
+}
