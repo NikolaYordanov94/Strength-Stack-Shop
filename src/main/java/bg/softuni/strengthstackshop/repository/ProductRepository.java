@@ -24,5 +24,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                                                          @Param("minPrice") Optional<Double> minPrice,
                                                          @Param("maxPrice") Optional<Double> maxPrice);
 
-
 }
