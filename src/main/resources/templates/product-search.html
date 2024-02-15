@@ -14,7 +14,7 @@
 <!--        <div class="jumbotron">-->
 <!--            <h1>Search product:</h1>-->
 
-<!--            <form th:object="${productSearchDTO}" th:method="post" th:action="@{/search}">-->
+<!--            <form th:object="${productSearchBindingModel}" th:method="post" th:action="@{/search}">-->
 <!--                <div class="form-group">-->
 <!--                    <div class="col-md-4 mb-3">-->
 <!--                        <label for="description">Description</label>-->
@@ -33,7 +33,7 @@
 <!--                    </div>-->
 
 <!--                    <div class="col-md-4 mb-3">-->
-<!--                        <label for="maxPrice">Min price:</label>-->
+<!--                        <label for="minPrice">Min price:</label>-->
 <!--                        <input th:field="*{minPrice}" type="number" name="maxPrice" id="minPrice" class="form-control" aria-describedby="inputGroupPrepend3" required>-->
 <!--                        <div th:if="${#fields.hasErrors('minPrice')}" th:errors="*{minPrice}" class="text-danger"></div>-->
 <!--                    </div>-->
