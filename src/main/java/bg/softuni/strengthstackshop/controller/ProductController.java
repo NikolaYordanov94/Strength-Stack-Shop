@@ -106,4 +106,22 @@ public class ProductController {
         return modelAndView;
     }
 
+
+    @GetMapping("/product-search")
+    public ModelAndView searchProduct(){
+
+        ModelAndView modelAndView = new ModelAndView("product-search");
+
+
+        return modelAndView;
+    }
+
+    @PostMapping("/product-search")
+    public ModelAndView searchProduct(ProductAddBindingModel productAddBindingModel){
+
+        ModelAndView modelAndView = new ModelAndView("product-search");
+
+        return modelAndView;
+    }
+
 }

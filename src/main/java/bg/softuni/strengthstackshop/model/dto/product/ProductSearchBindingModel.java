@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-public class productSearchBindingModel {
+public class ProductSearchBindingModel {
 
     @Size(min = 10, max = 100, message = "The description length should be between 10 and 100 symbols")
     private String description;

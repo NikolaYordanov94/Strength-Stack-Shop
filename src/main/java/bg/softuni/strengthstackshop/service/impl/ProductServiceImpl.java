@@ -1,5 +1,6 @@
 package bg.softuni.strengthstackshop.service.impl;
 
+import bg.softuni.strengthstackshop.model.dto.product.ProductSearchBindingModel;
 import bg.softuni.strengthstackshop.model.dto.product.ProductViewDTO;
 import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
 import bg.softuni.strengthstackshop.model.entity.Product;
@@ -93,5 +94,16 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + productId));
 
     }
+
+//    @Override
+//    public List<ProductViewDTO> findByInput(ProductSearchBindingModel productSearchBindingModel) {
+//
+//        return productRepository.findByBrandAndDescriptionAndPriceRange(productSearchBindingModel.getBrand(),
+//                productSearchBindingModel.getDescription(), productSearchBindingModel.getMinPrice(),
+//                productSearchBindingModel.getMaxPrice())
+//                .stream()
+//                .map(product -> modelMapper.map(product, ProductViewDTO))
+//                .toList();
+//    }
 
 }
