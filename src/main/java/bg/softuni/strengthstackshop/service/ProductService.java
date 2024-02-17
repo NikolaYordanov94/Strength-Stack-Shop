@@ -21,5 +21,5 @@ public interface ProductService {
 
     Product findById(Long productId);
 
-//    List<ProductViewDTO> findByInput(ProductSearchBindingModel productSearchBindingModel);
+    List<ProductViewDTO> findByInput(ProductSearchBindingModel productSearchBindingModel);
 }

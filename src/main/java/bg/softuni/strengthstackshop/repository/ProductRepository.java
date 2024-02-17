@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +16,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findAllByCategory(Category category);
 
-    @Query("SELECT p FROM Product p WHERE (:brand IS NULL OR p.brand = :brand) " +
-            "AND (:description IS NULL OR p.description LIKE %:description%) " +
-            "AND (:minPrice IS NULL OR p.price >= :minPrice) " +
-            "AND (:maxPrice IS NULL OR p.price <= :maxPrice)")
-    List<Product> findByBrandAndDescriptionAndPriceRange(@Param("brand") Optional<String> brand,
-                                                         @Param("description") Optional<String> description,
-                                                         @Param("minPrice") Optional<Double> minPrice,
-                                                         @Param("maxPrice") Optional<Double> maxPrice);
+    @Query("SELECT p FROM Product p WHERE (p.brand = :brand) " +
+            "OR (p.description LIKE %:description%) " +
+            "OR (p.price >= :minPrice) " +
+            "OR (p.price <= :maxPrice)")
+    List<Product> findByBrandAndDescriptionAndPriceRange(@Param("brand") String brand,
+                                                         @Param("description") String description,
+                                                         @Param("minPrice") BigDecimal minPrice,
+                                                         @Param("maxPrice") BigDecimal maxPrice);
 
 }

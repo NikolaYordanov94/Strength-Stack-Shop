@@ -95,15 +95,15 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-//    @Override
-//    public List<ProductViewDTO> findByInput(ProductSearchBindingModel productSearchBindingModel) {
-//
-//        return productRepository.findByBrandAndDescriptionAndPriceRange(productSearchBindingModel.getBrand(),
-//                productSearchBindingModel.getDescription(), productSearchBindingModel.getMinPrice(),
-//                productSearchBindingModel.getMaxPrice())
-//                .stream()
-//                .map(product -> modelMapper.map(product, ProductViewDTO))
-//                .toList();
-//    }
+    @Override
+    public List<ProductViewDTO> findByInput(ProductSearchBindingModel productSearchBindingModel) {
+
+        return productRepository.findByBrandAndDescriptionAndPriceRange(productSearchBindingModel.getBrand(),
+                productSearchBindingModel.getDescription(), productSearchBindingModel.getMinPrice(),
+                productSearchBindingModel.getMaxPrice())
+                .stream()
+                .map(product -> modelMapper.map(product, ProductViewDTO.class))
+                .toList();
+    }
 
 }
