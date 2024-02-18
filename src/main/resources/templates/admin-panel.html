@@ -11,17 +11,39 @@
     <div class="container bg-blur rounded mt-3 mb-4">
         <h1 class="my-text-color">Admin Panel</h1>
 
+<!--        todo add the logic in service and method in controller for search user-->
+        <div>
+            <div class="jumbotron my-text-color">
+                <h1 class="text-center">Search user:</h1>
+
+                <form class="justify-content-center" th:method="POST" th:action="@{/}">
+                    <div class="row">
+                        <div class="col-md-6 mb-3 offset-md-3">
+                            <div class="form-group text-center">
+                                <label for="description">Username</label>
+                                <input type="text" name="description" id="description" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center"> <!-- Center the button -->
+                        <button class="btn btn-primary logout-btn" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div th:each="user : ${allUsers}" class="d-flex flex-column align-items-center my-3">
             <p th:text="${user.getUsername()}"></p>
 
             <div class="d-flex justify-content-center">
-                <form th:action="@{/remove-user}" th:method="POST" class="button-spacing"> <!-- Added spacing between buttons -->
+                <form th:action="@{/remove-user}" th:method="POST" class="button-spacing">
                     <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
                     <input type="hidden" name="userId" th:value="${user.getId()}" />
                     <button type="submit" class="btn btn-danger">Remove user</button>
                 </form>
 
-                <form th:action="@{/change-role-to-admin}" th:method="POST" class="button-spacing"> <!-- Added spacing between buttons -->
+                <form th:action="@{/change-role-to-admin}" th:method="POST" class="button-spacing">
                     <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
                     <input type="hidden" name="userId" th:value="${user.getId()}" />
                     <button type="submit" class="btn btn-warning">Change to admin</button>
