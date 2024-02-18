@@ -16,31 +16,58 @@
 
             <form th:object="${productSearchBindingModel}" th:method="POST" th:action="@{/search}">
                 <div class="form-group">
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="description">Description</label>
                         <input th:field="*{description}" type="text" name="description" id="description" class="form-control" required>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="brand">Brand</label>
                         <input th:field="*{brand}" type="text" name="brand" id="brand" class="form-control" required>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="maxPrice">Max price:</label>
                         <input th:field="*{maxPrice}" type="number" name="maxPrice" id="maxPrice" class="form-control" aria-describedby="inputGroupPrepend3" required>
                         <div th:if="${#fields.hasErrors('maxPrice')}" th:errors="*{maxPrice}" class="text-danger"></div>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="minPrice">Min price:</label>
                         <input th:field="*{minPrice}" type="number" name="maxPrice" id="minPrice" class="form-control" aria-describedby="inputGroupPrepend3" required>
                         <div th:if="${#fields.hasErrors('minPrice')}" th:errors="*{minPrice}" class="text-danger"></div>
                     </div>
                 </div>
 
-                <button class="btn btn-secondary" type="submit">Search</button>
+                <button class="btn btn-primary logout-btn" type="submit">Search</button>
             </form>
+        </div>
+
+        <div class="row">
+            <div th:each="product : ${searchedProducts}" class="col-md-4">
+                <div class="card card-margin-top">
+                    <img th:src="${product.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
+                    <div class="card-body">
+                        <h5 class="card-text my-offers-text-color" th:text="${product.getDescription()}"></h5>
+                        <p class="card-text my-offers-text-color" th:text="${product.getCategory()}"></p>
+                        <p class="card-title my-offers-text-color" th:text="${product.getBrand()}"></p>
+                        <p class="card-text my-offers-text-color">
+                            Price:&nbsp; <span th:text="${product.getPrice()}"></span>&nbsp;bgn
+                        </p>
+
+                        <form th:action="@{/product-buy}" th:method="POST">
+                            <input type="hidden" name="productId" th:value="${product.getId()}">
+                            <button type="submit" class="btn btn-primary btn-block">Buy</button>
+                        </form>
+
+                        <form th:action="@{/product-details/{id}(id=${product.getId()})}" th:method="GET">
+                            <input type="hidden" name="productId" th:value="${product.getId()}">
+                            <button type="submit" class="btn btn-primary btn-block btn-details-offer">Details</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>
