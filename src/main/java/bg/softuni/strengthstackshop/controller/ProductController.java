@@ -1,6 +1,7 @@
 package bg.softuni.strengthstackshop.controller;
 
 import bg.softuni.strengthstackshop.model.dto.product.ProductAddBindingModel;
+import bg.softuni.strengthstackshop.model.dto.product.ProductSearchBindingModel;
 import bg.softuni.strengthstackshop.model.entity.Order;
 import bg.softuni.strengthstackshop.model.entity.Product;
 import bg.softuni.strengthstackshop.model.entity.User;
@@ -108,7 +109,8 @@ public class ProductController {
 
 
     @GetMapping("/product-search")
-    public ModelAndView searchProduct(){
+    public ModelAndView searchProduct(
+            @ModelAttribute("productSearchBindingModel") ProductSearchBindingModel productSearchBindingModel){
 
         ModelAndView modelAndView = new ModelAndView("product-search");
 

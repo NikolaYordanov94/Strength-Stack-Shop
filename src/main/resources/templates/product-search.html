@@ -8,41 +8,41 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
 
-<!--    todo add the DTO and fields + create controller-->
+<!--    todo update controller-->
 
-<!--    <div class="container">-->
-<!--        <div class="jumbotron">-->
-<!--            <h1>Search product:</h1>-->
+    <div class="container">
+        <div class="jumbotron my-text-color">
+            <h1>Search product:</h1>
 
-<!--            <form th:object="${productSearchBindingModel}" th:method="post" th:action="@{/search}">-->
-<!--                <div class="form-group">-->
-<!--                    <div class="col-md-4 mb-3">-->
-<!--                        <label for="description">Description</label>-->
-<!--                        <input th:field="*{description}" type="text" name="description" id="description" class="form-control" required>-->
-<!--                    </div>-->
+            <form th:object="${productSearchBindingModel}" th:method="POST" th:action="@{/search}">
+                <div class="form-group">
+                    <div class="col-md-4 mb-3">
+                        <label for="description">Description</label>
+                        <input th:field="*{description}" type="text" name="description" id="description" class="form-control" required>
+                    </div>
 
-<!--                    <div class="col-md-4 mb-3">-->
-<!--                        <label for="brand">Description</label>-->
-<!--                        <input th:field="*{brand}" type="text" name="brand" id="brand" class="form-control" required>-->
-<!--                    </div>-->
+                    <div class="col-md-4 mb-3">
+                        <label for="brand">Brand</label>
+                        <input th:field="*{brand}" type="text" name="brand" id="brand" class="form-control" required>
+                    </div>
 
-<!--                    <div class="col-md-4 mb-3">-->
-<!--                        <label for="maxPrice">Max price:</label>-->
-<!--                        <input th:field="*{maxPrice}" type="number" name="maxPrice" id="maxPrice" class="form-control" aria-describedby="inputGroupPrepend3" required>-->
-<!--                        <div th:if="${#fields.hasErrors('maxPrice')}" th:errors="*{maxPrice}" class="text-danger"></div>-->
-<!--                    </div>-->
+                    <div class="col-md-4 mb-3">
+                        <label for="maxPrice">Max price:</label>
+                        <input th:field="*{maxPrice}" type="number" name="maxPrice" id="maxPrice" class="form-control" aria-describedby="inputGroupPrepend3" required>
+                        <div th:if="${#fields.hasErrors('maxPrice')}" th:errors="*{maxPrice}" class="text-danger"></div>
+                    </div>
 
-<!--                    <div class="col-md-4 mb-3">-->
-<!--                        <label for="minPrice">Min price:</label>-->
-<!--                        <input th:field="*{minPrice}" type="number" name="maxPrice" id="minPrice" class="form-control" aria-describedby="inputGroupPrepend3" required>-->
-<!--                        <div th:if="${#fields.hasErrors('minPrice')}" th:errors="*{minPrice}" class="text-danger"></div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                    <div class="col-md-4 mb-3">
+                        <label for="minPrice">Min price:</label>
+                        <input th:field="*{minPrice}" type="number" name="maxPrice" id="minPrice" class="form-control" aria-describedby="inputGroupPrepend3" required>
+                        <div th:if="${#fields.hasErrors('minPrice')}" th:errors="*{minPrice}" class="text-danger"></div>
+                    </div>
+                </div>
 
-<!--                <button class="btn btn-secondary" type="submit">Search</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
 </main>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </body>

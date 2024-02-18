@@ -12,6 +12,7 @@
         <h1 class="my-text-color">All offers</h1>
         <!-- Buttons Row -->
         <div class="row mb-3">
+
             <!-- Supplements Button -->
             <div class="col">
                 <form th:action="@{offers-supplements}" th:method="GET">
@@ -32,7 +33,16 @@
                     <button type="submit" class="btn btn-primary equal-width-btn">Clothes</button>
                 </form>
             </div>
+
+            <!-- Search Button -->
+            <div class="col">
+                <form th:action="@{product-search}">
+                    <button type="submit" class="btn btn-primary equal-width-btn">Search products</button>
+                </form>
+            </div>
         </div>
+
+
 
 
         <div class="row">
