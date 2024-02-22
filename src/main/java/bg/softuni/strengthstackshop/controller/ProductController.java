@@ -114,28 +114,44 @@ public class ProductController {
     public ModelAndView searchProduct(
             @ModelAttribute("productSearchBindingModel") ProductSearchBindingModel productSearchBindingModel){
 
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView("product-search");
 
         List<ProductViewDTO> searchedProducts = productService
                 .findByInput(productSearchBindingModel);
 
-        modelAndView.setViewName("product-search");
         modelAndView.addObject("searchedProducts", searchedProducts);
 
         return modelAndView;
     }
 
-    @PostMapping("/product-search")
-    public ModelAndView searchProduct(
+
+    @GetMapping("/product-search-results")
+    public ModelAndView searchProductResults(
             @ModelAttribute("productSearchBindingModel") @Valid ProductSearchBindingModel productSearchBindingModel,
-                                      BindingResult bindingResult){
+                                     BindingResult bindingResult){
 
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("product-search");
-        }
+        ModelAndView modelAndView = new ModelAndView("product-search-results");
 
+        List<ProductViewDTO> searchedProducts = productService
+                .findByInput(productSearchBindingModel);
 
-        return new ModelAndView("redirect:/product-search");
+        modelAndView.addObject("searchedProducts", searchedProducts);
+
+        return new ModelAndView();
     }
+
+
+//    @PostMapping("/product-search")
+//    public ModelAndView searchProduct(
+//            @ModelAttribute("productSearchBindingModel") @Valid ProductSearchBindingModel productSearchBindingModel,
+//                                      BindingResult bindingResult){
+//
+//        if (bindingResult.hasErrors()) {
+//            return new ModelAndView("product-search");
+//        }
+//
+//
+//        return new ModelAndView("redirect:/product-search");
+//    }
 
 }
