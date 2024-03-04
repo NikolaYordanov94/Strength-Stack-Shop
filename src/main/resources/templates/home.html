@@ -8,8 +8,8 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
 
-    <div class="container mt-3 mb-4">
-        <h1>Orders history</h1>
+    <div class="container bg-blur rounded mt-3 mb-4">
+        <h1 class="orders-history-text">Orders history</h1>
 
         <div class="row">
             <div th:each="order : ${currentUserOrders}" class="col-md-4 mb-3">

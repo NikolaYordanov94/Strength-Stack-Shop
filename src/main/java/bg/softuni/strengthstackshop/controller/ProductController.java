@@ -116,10 +116,10 @@ public class ProductController {
 
         ModelAndView modelAndView = new ModelAndView("product-search");
 
-        List<ProductViewDTO> searchedProducts = productService
-                .findByInput(productSearchBindingModel);
-
-        modelAndView.addObject("searchedProducts", searchedProducts);
+//        List<ProductViewDTO> searchedProducts = productService
+//                .findByInput(productSearchBindingModel);
+//
+//        modelAndView.addObject("searchedProducts", searchedProducts);
 
         return modelAndView;
     }
