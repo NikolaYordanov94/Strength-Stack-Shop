@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}">
+    <title>We're sorry, but the action you tried to perform is not allowed on this resource - 405 Method Not Allowed</title>
+</head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+<main>
+
+    <section>
+        <div class="container btn-remove-product">
+            <h1 style="text-align: center;">The specific action or operation is restricted for the requested resource</h1>
+            <img th:src="@{/images/Error-pic.jpeg}"  class="error-img-style" alt="Error Picture">
+        </div>
+    </section>
+
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

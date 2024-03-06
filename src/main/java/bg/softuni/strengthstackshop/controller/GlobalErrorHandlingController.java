@@ -34,7 +34,7 @@ public class GlobalErrorHandlingController {
     @ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handleAccessDeniedError(AccessDeniedException accessDeniedException) {
 
-        ModelAndView modelAndView = new ModelAndView("error/access-denied");
+        ModelAndView modelAndView = new ModelAndView("error/405");
 
         return modelAndView;
     }
