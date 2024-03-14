@@ -18,7 +18,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final RoleRepository roleRepository;
 
-    private final String USER_NOT_FOUND_WITH_ID = "User not found with id: ";
+    private static final String USER_NOT_FOUND_WITH_ID = "User not found with id: ";
 
     public AdminServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;

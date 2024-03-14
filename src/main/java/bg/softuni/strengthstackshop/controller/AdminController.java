@@ -15,6 +15,8 @@ public class AdminController {
 
     private final AdminService adminService;
 
+    private static final String REDIRECT_ADMIN_PANEL = "redirect:/admin-panel";
+
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
@@ -35,7 +37,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         adminService.removeUserById(userId);
 
-        modelAndView.setViewName("redirect:/admin-panel");
+        modelAndView.setViewName(REDIRECT_ADMIN_PANEL);
 
         return modelAndView;
 
@@ -47,7 +49,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         adminService.changeRoleToAdmin(userId);
 
-        modelAndView.setViewName("redirect:/admin-panel");
+        modelAndView.setViewName(REDIRECT_ADMIN_PANEL);
 
         return modelAndView;
     }
@@ -58,7 +60,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         adminService.changeRoleToUser(userId);
 
-        modelAndView.setViewName("redirect:/admin-panel");
+        modelAndView.setViewName(REDIRECT_ADMIN_PANEL);
 
         return modelAndView;
     }
