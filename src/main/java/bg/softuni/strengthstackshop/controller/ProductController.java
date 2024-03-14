@@ -137,7 +137,7 @@ public class ProductController {
 
         modelAndView.addObject("searchedProducts", searchedProducts);
 
-        return new ModelAndView();
+        return modelAndView;
     }
 
 

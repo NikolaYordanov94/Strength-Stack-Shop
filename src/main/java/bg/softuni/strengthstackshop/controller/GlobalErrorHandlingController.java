@@ -16,27 +16,24 @@ public class GlobalErrorHandlingController {
     @ExceptionHandler(ObjectNotFoundException.class)
     public ModelAndView handleNotFound(ObjectNotFoundException exception) {
 
-        ModelAndView modelAndView = new ModelAndView("error/404");
 
-        return modelAndView;
+        return new ModelAndView("error/404");
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(ServerErrorException.class)
     public ModelAndView handleServerError(ServerErrorException serverErrorException) {
 
-        ModelAndView modelAndView = new ModelAndView("error/500");
 
-        return modelAndView;
+        return new ModelAndView("error/500");
     }
 
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handleAccessDeniedError(AccessDeniedException accessDeniedException) {
 
-        ModelAndView modelAndView = new ModelAndView("error/405");
 
-        return modelAndView;
+        return new ModelAndView("error/405");
     }
 
 }

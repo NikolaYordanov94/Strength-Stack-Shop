@@ -18,6 +18,8 @@ public class AdminServiceImpl implements AdminService {
 
     private final RoleRepository roleRepository;
 
+    private final String USER_NOT_FOUND_WITH_ID = "User not found with id: ";
+
     public AdminServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
 
@@ -43,7 +45,7 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void removeUserById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_ID + id));
 
         user.getRoles().clear();
         userRepository.removeUserById(id);
@@ -52,7 +54,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void changeRoleToAdmin(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_ID + id));
 
         user.getRoles().clear();
 
@@ -66,7 +68,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void changeRoleToUser(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_ID + id));
 
         user.getRoles().clear();
 
