@@ -38,7 +38,7 @@
         <div class="row card-margin-top">
             <div th:each="offer : ${allGear}" class="col-md-4">
                 <div class="card">
-                    <img th:src="${offer.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
+                    <img th:src="${offer.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product">
                     <div class="card-body">
                         <h5 class="card-text my-offers-text-color" th:text="${offer.getDescription()}"></h5>
                         <p class="card-text my-offers-text-color" th:text="${offer.getCategory()}"></p>

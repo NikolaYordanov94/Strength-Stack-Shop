@@ -13,7 +13,7 @@
             <div th:each="product : ${currentOrderProducts}" class="col-md-4">
                 <div class="card product-card">
                     <div class="card-body">
-                        <img th:src="${product.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product Picture">
+                        <img th:src="${product.getPictureUrl()}" class="card-img-top img-fluid card-img-custom" alt="Product">
                         <p class="product-info" th:text="${product.getDescription()}"></p>
                         <p class="product-info" th:text="${product.getBrand()}"></p>
                         <p class="product-info">
